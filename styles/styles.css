@@ -1,0 +1,60 @@
+
+@charset "ISO-8859-1";
+*{
+	margin: 0;
+	padding: 0;
+}
+.conteneur{
+	background-color: #1a1b4a;
+}
+.img_fond{
+	max-width:100%;
+	height: 200px;
+    position:relative;
+
+    background: url("../images/bioRelai.png") no-repeat;
+	background-size: auto;
+}
+.header{
+	background-color: #554516;
+}
+nav.menuPrincipal{
+	text-align: right;
+	background-color:#333594;
+	font-size: 0px;
+}
+
+nav.menuPrincipal ul {
+	display:  inline;
+	list-style: none;
+	padding: 0px;
+ 	margin: 0px;
+	font-family: Helvetica; 
+}
+
+nav.menuPrincipal ul li {
+	display: table-cell;
+	text-align: center;
+	width: 140px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px;
+}
+
+nav.menuPrincipal ul li a {
+  text-decoration: none;
+  color: white; 
+}
+
+nav.menuPrincipal ul li a:hover {
+  color: rgb(0, 0, 0);
+}
+
+nav.menuPrincipal ul li.actif {
+  	background-color: ivory;
+  	color: black;
+  	padding: 10px;
+}
+#texteBienvenue{
+	margin-left: 10%;
+}

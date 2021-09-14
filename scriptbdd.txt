@@ -1,0 +1,126 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: categProduit
+#------------------------------------------------------------
+
+CREATE TABLE categProduit(
+        codeCategProd Varchar (3) NOT NULL ,
+        nomCategProd  Varchar (3) NOT NULL
+	,CONSTRAINT categProduit_PK PRIMARY KEY (codeCategProd)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: PRODUCTEUR
+#------------------------------------------------------------
+
+CREATE TABLE PRODUCTEUR(
+        codeProduct       Varchar (3) NOT NULL ,
+        descriptifProduct Char (50) NOT NULL
+	,CONSTRAINT PRODUCTEUR_PK PRIMARY KEY (codeProduct)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: PRODUIT
+#------------------------------------------------------------
+
+CREATE TABLE PRODUIT(
+        codeProduit       Varchar (3) NOT NULL ,
+        nomProduit        Char (10) NOT NULL ,
+        descriptifProduit Varchar (25) NOT NULL ,
+        codeCategProd     Varchar (3) NOT NULL ,
+        codeProduct       Varchar (3) NOT NULL
+	,CONSTRAINT PRODUIT_PK PRIMARY KEY (codeProduit)
+
+	,CONSTRAINT PRODUIT_categProduit_FK FOREIGN KEY (codeCategProd) REFERENCES categProduit(codeCategProd)
+	,CONSTRAINT PRODUIT_PRODUCTEUR0_FK FOREIGN KEY (codeProduct) REFERENCES PRODUCTEUR(codeProduct)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: UTILISATEUR
+#------------------------------------------------------------
+
+CREATE TABLE UTILISATEUR(
+        codeProduct       Varchar (3) NOT NULL ,
+        codeUser          Varchar (3) NOT NULL ,
+        nomUser           Char (15) NOT NULL ,
+        prenomUser        Char (3) NOT NULL ,
+        mdpUser           Varchar (15) NOT NULL ,
+        mailUser          Varchar (25) NOT NULL ,
+        statut            Char (10) NOT NULL ,
+        descriptifProduct Char (50) NOT NULL
+	,CONSTRAINT UTILISATEUR_PK PRIMARY KEY (codeProduct,codeUser)
+
+	,CONSTRAINT UTILISATEUR_PRODUCTEUR_FK FOREIGN KEY (codeProduct) REFERENCES PRODUCTEUR(codeProduct)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: SEMAINE
+#------------------------------------------------------------
+
+CREATE TABLE SEMAINE(
+        codeSemaine   Varchar (3) NOT NULL ,
+        dateVente     Date NOT NULL ,
+        dateDebutProd Date NOT NULL ,
+        dateFinProd   Date NOT NULL ,
+        dateFinCli    Date NOT NULL
+	,CONSTRAINT SEMAINE_PK PRIMARY KEY (codeSemaine)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: COMMANDE
+#------------------------------------------------------------
+
+CREATE TABLE COMMANDE(
+        numCommande  Varchar (3) NOT NULL ,
+        dateCommande Date NOT NULL ,
+        etatCommande Char (3) NOT NULL ,
+        codeProduct  Varchar (3) NOT NULL ,
+        codeUser     Varchar (3) NOT NULL ,
+        codeSemaine  Varchar (3) NOT NULL
+	,CONSTRAINT COMMANDE_PK PRIMARY KEY (numCommande)
+
+	,CONSTRAINT COMMANDE_UTILISATEUR_FK FOREIGN KEY (codeProduct,codeUser) REFERENCES UTILISATEUR(codeProduct,codeUser)
+	,CONSTRAINT COMMANDE_SEMAINE0_FK FOREIGN KEY (codeSemaine) REFERENCES SEMAINE(codeSemaine)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: COMMANDER
+#------------------------------------------------------------
+
+CREATE TABLE COMMANDER(
+        codeProduit Varchar (3) NOT NULL ,
+        numCommande Varchar (3) NOT NULL ,
+        qteCommande Int NOT NULL
+	,CONSTRAINT COMMANDER_PK PRIMARY KEY (codeProduit,numCommande)
+
+	,CONSTRAINT COMMANDER_PRODUIT_FK FOREIGN KEY (codeProduit) REFERENCES PRODUIT(codeProduit)
+	,CONSTRAINT COMMANDER_COMMANDE0_FK FOREIGN KEY (numCommande) REFERENCES COMMANDE(numCommande)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: PROPOSE
+#------------------------------------------------------------
+
+CREATE TABLE PROPOSE(
+        codeProduit  Varchar (3) NOT NULL ,
+        codeSemaine  Varchar (3) NOT NULL ,
+        qteProduit   Int NOT NULL ,
+        prixProduit  Int NOT NULL ,
+        uniteProduit Char (3) NOT NULL
+	,CONSTRAINT PROPOSE_PK PRIMARY KEY (codeProduit,codeSemaine)
+
+	,CONSTRAINT PROPOSE_PRODUIT_FK FOREIGN KEY (codeProduit) REFERENCES PRODUIT(codeProduit)
+	,CONSTRAINT PROPOSE_SEMAINE0_FK FOREIGN KEY (codeSemaine) REFERENCES SEMAINE(codeSemaine)
+)ENGINE=InnoDB;
+
