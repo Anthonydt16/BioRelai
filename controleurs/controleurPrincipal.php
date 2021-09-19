@@ -5,7 +5,8 @@ require_once 'modeles/dao/UtilisateurDAO.php';
 require_once 'modeles/dto/Utilisateur.php';
 require_once 'modeles/traits/hydrate.php';
 $uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
-$_SESSION['Compte'] = 'visiteur';
+
+
 if(isset($_GET['bioRelai'])){
 	$_SESSION['bioRelai']= $_GET['bioRelai'];
 }
@@ -43,6 +44,7 @@ if(isset($_POST["login"])){
 			$unUtilisateur->hydrate($tabUtilisateur);
 			$_SESSION['unUtilisateur'] = serialize($unUtilisateur);
 			$_SESSION['bioRelai'] = 'Visiteurs';
+			$_SESSION['Compte'] = 'inscrit';
 		}
 	}
 }
@@ -71,7 +73,9 @@ if(isset($_POST["loginI"])){
 
 
 
-
+if(empty($_SESSION['unUtilisateur'])){
+	$_SESSION['Compte'] = 'visiteur';
+}
 
 $bioRelai = new Menu("bioRelai");
 
@@ -80,10 +84,22 @@ if($_SESSION['Compte'] == 'visiteur'){
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("Presentation", "Visiteurs"));
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("connexion", "Connexion"));
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("inscription", "Inscription"));
+		$menuPrincipalbioRelai = $bioRelai->creerMenu('bioRelaiVisiteur','bioRelai');
 }
 
+//verifi si $_SESSION['unUtilisateur'] existe bien sinon il passe
+if(isset($_SESSION['unUtilisateur'])){
 
+		if(!empty($_POST["login"])){
 
-    $menuPrincipalbioRelai = $bioRelai->creerMenu('bioRelaiVisiteur','bioRelai');
+				$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+				if ($UnUtilisateur->getStatut() == 1) {
+					//redirection vert adherent
+						$_SESSION['bioRelai'] = 'Adherents';
+				    include_once dispatcher::dispatch($_SESSION['bioRelai']);
+			}
+		}
+}
 
     include_once dispatcher::dispatch($_SESSION['bioRelai']);
