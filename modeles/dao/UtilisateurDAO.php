@@ -3,13 +3,26 @@ class UtilisateurDAO{
   public function __construct(){
       }
    function UNUtilisateur($login){
-     $result =[];
      $requete = DBConnex::getInstance()->prepare("SELECT * FROM `utilisateur` where login = :login ");
      $requete->bindParam(":login",$login);
      $requete->execute();
      $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
      return $donnee;
  }
+
+   function AjoutUtilisateur($mailUser,$prenomUser,$nomUser,$mdpUser,$loginUser,$statut){
+     $requete = DBConnex::getInstance()->prepare("INSERT INTO `utilisateur` (`mailUser`, `prenomUser`, `nomUser`, `mdpUser`, `statut`, `login`) VALUES ( :mail, :prenom, :nom, :mdp, :statut, :login);");
+     $requete->bindParam(":mail",$mailUser);
+     $requete->bindParam(":prenom",$prenomUser);
+     $requete->bindParam(":nom",$nomUser);
+     $requete->bindParam(":mdp",$mdpUser);
+     $requete->bindParam(":login",$loginUser);
+     $requete->bindParam(":statut",$statut);
+     $requete->execute();
+
+
+
+   }
 
 
 

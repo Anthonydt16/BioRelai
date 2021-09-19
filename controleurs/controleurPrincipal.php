@@ -16,6 +16,10 @@ else
 	}
 }
 
+
+
+
+//connexion
 if(isset($_POST["login"])){
 
 	if(!empty($_POST["login"])){
@@ -42,6 +46,31 @@ if(isset($_POST["login"])){
 		}
 	}
 }
+
+
+
+//Inscription
+
+if(isset($_POST["loginI"])){
+
+	if(!empty($_POST["loginI"])){
+	 //verification bon mdp et login
+
+		//connex bdd
+		$maConnex = $uneConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$utilisateurDonnee = new UtilisateurDAO();
+
+		$utilisateurDonnee->AjoutUtilisateur($_POST['email'],$_POST['prenom'],$_POST['nom'],$_POST['mdpI'],$_POST['loginI'],1);
+
+		$_SESSION['bioRelai'] = 'Connexion';
+	}
+}
+
+
+
+
+
 
 
 $bioRelai = new Menu("bioRelai");
