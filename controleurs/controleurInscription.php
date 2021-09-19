@@ -2,19 +2,19 @@
 if($_SESSION['Compte'] == 'visiteur'){
 $messageErreurConnexion = "erreur de connexion !";
 $formulaireInscription = new Formulaire('post', 'index.php', 'Insciption', 'Insciption');
- 
+
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Nom :',"label"));
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('nom', 'nom', '', 1, 'Entrez votre nom', '',"form-control"));
 $formulaireInscription->ajouterComposantTab();
 
- 
+
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Prénom :',"label"));
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('prenom', 'prenom', '', 1, 'Entrez votre prénom', '',"form-control"));
 $formulaireInscription->ajouterComposantTab();
 
- 
+
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Login :',"label"));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('login', 'login', '', 1, 'Entrez votre login', '',"form-control"));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputTexte('loginI', 'loginI', '', 1, 'Entrez votre login', '',"form-control"));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('email :',"label"));
@@ -26,7 +26,7 @@ $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInput
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerLabel('Mot de Passe :',"label"));
-$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputMdp('mdp', 'mdp',  1, 'Entrez votre mot de passe', '',"form-control"));
+$formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputMdp('mdpI', 'mdpI',  1, 'Entrez votre mot de passe', '',"form-control"));
 $formulaireInscription->ajouterComposantTab();
 
 $formulaireInscription->ajouterComposantLigne($formulaireInscription->creerInputSubmit('submitConnex', 'submitConnex', 'Valider',"btn btn-light btn-lg btn-block"));

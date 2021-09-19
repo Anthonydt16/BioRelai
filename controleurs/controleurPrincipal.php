@@ -1,4 +1,10 @@
-<?php 
+<?php
+require_once 'modeles/dao/param.php';
+require_once 'modeles/dao/dBconnex.php';
+require_once 'modeles/dao/UtilisateurDAO.php';
+require_once 'modeles/dto/Utilisateur.php';
+require_once 'modeles/traits/hydrate.php';
+$uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
 $_SESSION['Compte'] = 'visiteur';
 if(isset($_GET['bioRelai'])){
 	$_SESSION['bioRelai']= $_GET['bioRelai'];
@@ -9,6 +15,34 @@ else
 		$_SESSION['bioRelai']="visiteurs";
 	}
 }
+
+if(isset($_POST["login"])){
+
+	if(!empty($_POST["login"])){
+	 //verification bon mdp et login
+
+		//connex bdd
+		$maConnex = $uneConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$login= $uneConnex->login($maConnex,$_POST["login"]);
+		$mdp = $uneConnex->password($maConnex,$_POST["mdp"]);
+		$utilisateurDonnee = new UtilisateurDAO();
+		$tabUtilisateur = $utilisateurDonnee->UNUtilisateur($login);
+
+		//teste si le mdp et le login correspond
+		if($mdp == $_POST["mdp"] && $login == $_POST["login"]){
+
+
+			//instanciation de la classe
+
+			$unUtilisateur= new Utilisateur();
+			$unUtilisateur->hydrate($tabUtilisateur);
+			$_SESSION['unUtilisateur'] = serialize($unUtilisateur);
+			$_SESSION['bioRelai'] = 'Visiteurs';
+		}
+	}
+}
+
 
 $bioRelai = new Menu("bioRelai");
 
@@ -24,4 +58,3 @@ if($_SESSION['Compte'] == 'visiteur'){
     $menuPrincipalbioRelai = $bioRelai->creerMenu('bioRelaiVisiteur','bioRelai');
 
     include_once dispatcher::dispatch($_SESSION['bioRelai']);
-
