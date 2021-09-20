@@ -4,4 +4,4 @@
  $_SESSION['bioRelai'] ='Visiteurs';
  $_SESSION['unUtilisateur'] = [];
 
-include_once dispatcher::dispatch($_SESSION['bioRelai']);
+header('location: index.php');
