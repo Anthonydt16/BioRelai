@@ -1,2 +1,2 @@
 <?php
-echo "gg";
+require_once 'vues/adherents/vueAdherentsPanier.php' ;

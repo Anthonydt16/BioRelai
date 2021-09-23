@@ -6,8 +6,17 @@ require_once 'modeles/dto/Utilisateur.php';
 require_once 'modeles/traits/hydrate.php';
 $uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
 
-
 if(isset($_GET['bioRelai'])){
+	//verification si il faut le rediriger vers controleur adherent
+	if($_GET['bioRelai'] == "AdherentsAchats" || $_GET['bioRelai'] == "AdherentsFactures" || $_GET['bioRelai'] == "AdherentsMonCompte" || $_GET['bioRelai'] == "AdherentsPanier"){
+		//stocker la value du get
+		$_SESSION['navBarRequete'] = $_GET['bioRelai'];
+		// rediriger vers le controleur adherent
+		$_SESSION['bioRelai'] = "Adherents";
+		//redirection vers adherent
+		include_once dispatcher::dispatch($_SESSION['bioRelai']);
+	}
+	
 	$_SESSION['bioRelai']= $_GET['bioRelai'];
 }
 else

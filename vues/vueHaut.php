@@ -5,11 +5,12 @@
         </div>
         <nav class="menuPrincipal">
             <?php
+                var_dump($bioRelai);
                 echo $bioRelai->afficheMenu();
             ?>
         </nav>
-        
-        
+
+
 
     </div>
 
