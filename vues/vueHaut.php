@@ -1,12 +1,14 @@
 
 <header>
     <div class="header">
-        <div class="img_fond">
+        <div class="img_fond">unserialize(
         </div>
         <nav class="menuPrincipal">
             <?php
-                var_dump($bioRelai);
-                echo $bioRelai->afficheMenu();
+            if(isset($bioRelai)){
+              echo $bioRelai->afficheMenu();
+            }
+
             ?>
         </nav>
 

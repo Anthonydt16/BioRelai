@@ -1,31 +1,31 @@
 <?php
-require_once 'modeles/dao/param.php';
-require_once 'modeles/dao/dBconnex.php';
-require_once 'modeles/dao/UtilisateurDAO.php';
-require_once 'modeles/dto/Utilisateur.php';
-require_once 'modeles/traits/hydrate.php';
-$uneConnex = new DBConnex(Param::$dsn, Param::$user, Param::$pass);
+
 
 if(isset($_GET['bioRelai'])){
+
 	//verification si il faut le rediriger vers controleur adherent
-	if($_GET['bioRelai'] == "AdherentsAchats" || $_GET['bioRelai'] == "AdherentsFactures" || $_GET['bioRelai'] == "AdherentsMonCompte" || $_GET['bioRelai'] == "AdherentsPanier"){
-		//stocker la value du get
-		$_SESSION['navBarRequete'] = $_GET['bioRelai'];
-		// rediriger vers le controleur adherent
-		$_SESSION['bioRelai'] = "Adherents";
-		//redirection vers adherent
-		include_once dispatcher::dispatch($_SESSION['bioRelai']);
+	if(!empty($_SESSION['unUtilisateur'])){
+
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+		if($UnUtilisateur->getStatut() == 1){
+				// rediriger vers le controleur adherent
+				$_SESSION['navBarRequete'] = $_GET['bioRelai'];
+					$_SESSION['bioRelai'] = "Adherents";
+
+
+		}
+
 	}
-	
-	$_SESSION['bioRelai']= $_GET['bioRelai'];
-}
+		$_SESSION['bioRelai']= $_GET['bioRelai'];
+	}
+
 else
 {
 	if(!isset($_SESSION['bioRelai'])){
 		$_SESSION['bioRelai']="visiteurs";
+
 	}
 }
-
 //connexion
 if(isset($_POST["login"])){
 
@@ -33,19 +33,16 @@ if(isset($_POST["login"])){
 	 //verification bon mdp et login
 
 		//connex bdd
-		$maConnex = $uneConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
-		//recup des login et MDP
-		$login= $uneConnex->login($maConnex,$_POST["login"]);
-		$mdp = $uneConnex->password($maConnex,$_POST["mdp"]);
-		$utilisateurDonnee = new UtilisateurDAO();
-		$tabUtilisateur = $utilisateurDonnee->UNUtilisateur($login);
 
-		//teste si le mdp et le login correspond
-		if($mdp == $_POST["mdp"] && $login == $_POST["login"]){
+		//recup des login et MDP rajouter le function
+		$login= $_POST["login"];
+		$mdp = $_POST["mdp"];
+		$tabUtilisateur = UtilisateurDAO::UNUtilisateur($login, $mdp);
+		$_SESSION['authentification'] = $tabUtilisateur;
 
+		if($_SESSION['authentification']){
 
 			//instanciation de la classe
-
 			$unUtilisateur= new Utilisateur();
 			$unUtilisateur->hydrate($tabUtilisateur);
 			$_SESSION['unUtilisateur'] = serialize($unUtilisateur);
@@ -73,37 +70,32 @@ if(isset($_POST["loginI"])){
 	}
 }
 
-
-
-
-
-if(empty($_SESSION['unUtilisateur'])){
+if(!isset($_SESSION['unUtilisateur'])){
 	$_SESSION['Compte'] = 'visiteur';
 }
 
 $bioRelai = new Menu("bioRelai");
 
 if($_SESSION['Compte'] == 'visiteur'){
-
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("Presentation", "Visiteurs"));
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("connexion", "Connexion"));
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("inscription", "Inscription"));
-		$menuPrincipalbioRelai = $bioRelai->creerMenu('bioRelaiVisiteur','bioRelai');
+		$bioRelai->creerMenu('bioRelaiVisiteur','bioRelai');
 }
 
 //verifi si $_SESSION['unUtilisateur'] existe bien sinon il passe
 if(isset($_SESSION['unUtilisateur'])){
 
-		if(!empty($_POST["login"])){
+		if(!empty($_SESSION['unUtilisateur'])){
 
 				$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
-
+						echo $UnUtilisateur->getStatut();
 				if ($UnUtilisateur->getStatut() == 1) {
 					//redirection vert adherent
 						$_SESSION['bioRelai'] = 'Adherents';
+						var_dump($_SESSION['bioRelai']);
 				    include_once dispatcher::dispatch($_SESSION['bioRelai']);
 			}
 		}
 }
-
     include_once dispatcher::dispatch($_SESSION['bioRelai']);
