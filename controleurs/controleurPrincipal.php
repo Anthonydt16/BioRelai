@@ -21,10 +21,10 @@ if(isset($_GET['bioRelai'])){
 
 else
 {
-	if(!isset($_SESSION['bioRelai'])){
-		$_SESSION['bioRelai']="visiteurs";
 
-	}
+		$_SESSION['bioRelai']="visiteurs";
+		$_SESSION['Compte'] = "visiteur";
+
 }
 //connexion
 if(isset($_POST["login"])){
@@ -60,7 +60,9 @@ if(isset($_POST["loginI"])){
 	 //verification bon mdp et login
 
 		//connex bdd
-		$maConnex = $uneConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		$maConnex = new DBConnex();
+		
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
 		//recup des login et MDP
 		$utilisateurDonnee = new UtilisateurDAO();
 
@@ -89,11 +91,10 @@ if(isset($_SESSION['unUtilisateur'])){
 		if(!empty($_SESSION['unUtilisateur'])){
 
 				$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
-						echo $UnUtilisateur->getStatut();
 				if ($UnUtilisateur->getStatut() == 1) {
 					//redirection vert adherent
 						$_SESSION['bioRelai'] = 'Adherents';
-						var_dump($_SESSION['bioRelai']);
+
 				    include_once dispatcher::dispatch($_SESSION['bioRelai']);
 			}
 		}
