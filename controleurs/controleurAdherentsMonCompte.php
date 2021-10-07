@@ -42,7 +42,7 @@ if(isset($_POST['prenomM'])){
     $unAdherentDAO = new adherentDAO();
     $unAdherentDAO->modificationAdherent($UnUtilisateur->getIdUser(),$_POST['EmailM'], $_POST['prenomM'], $_POST['nomM'], $_POST['loginM'], $_POST['mdpM']);
     $tabUtilisateur = $unAdherentDAO->UNUtilisateurID($UnUtilisateur->getIdUser());
-    //mise a jours des données *
+    //mise a jours des données
     $UnUtilisateur->hydrate($tabUtilisateur);
     $_SESSION['unUtilisateur'] = serialize($UnUtilisateur);
   }
