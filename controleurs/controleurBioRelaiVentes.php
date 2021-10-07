@@ -1,2 +1,3 @@
 <?php
-echo 'pd';
+
+require_once 'vues/bioRelai/vueBioRelaiVentes.php' ;

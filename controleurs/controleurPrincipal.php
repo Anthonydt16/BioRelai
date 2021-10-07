@@ -14,6 +14,10 @@ if(isset($_GET['bioRelai'])){
 
 
 		}
+		elseif($UnUtilisateur->getStatut() == 'RESP'){
+			$_SESSION['navBarRequete'] = $_GET['bioRelai'];
+					$_SESSION['bioRelai'] = 'BioRelai';
+		}
 
 	}
 		$_SESSION['bioRelai']= $_GET['bioRelai'];
@@ -61,7 +65,7 @@ if(isset($_POST["loginI"])){
 
 		//connex bdd
 		$maConnex = new DBConnex();
-
+		
 		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
 		//recup des login et MDP
 		$utilisateurDonnee = new UtilisateurDAO();
@@ -71,6 +75,44 @@ if(isset($_POST["loginI"])){
 		$_SESSION['bioRelai'] = 'Connexion';
 	}
 }
+
+//Modif bio relai
+
+if(isset($_POST["loginIMBio"])){
+
+	if(!empty($_POST["loginIMBio"])){
+		$maConnex = new DBConnex();
+		
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::ModifCompteBioRelai($_POST['loginIMBio'],$_POST['mdpIMBio'],$UnUtilisateur->getIdUser());
+
+		$_SESSION['bioRelai'] = 'Connexion';
+
+	}
+}
+
+//Nouveau Prod
+
+if(isset($_POST["loginIMBio"])){
+
+	if(!empty($_POST["loginIMBio"])){
+		$maConnex = new DBConnex();
+		
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::ModifCompteBioRelai($_POST['loginIMBio'],$_POST['mdpIMBio'],$UnUtilisateur->getIdUser());
+
+		$_SESSION['bioRelai'] = 'Connexion';
+
+	}
+}
+
+
 
 if(!isset($_SESSION['unUtilisateur'])){
 	$_SESSION['Compte'] = 'visiteur';
@@ -95,8 +137,14 @@ if(isset($_SESSION['unUtilisateur'])){
 					//redirection vert adherent
 						$_SESSION['bioRelai'] = 'Adherents';
 
-				    //include_once dispatcher::dispatch($_SESSION['bioRelai']);
+				    include_once dispatcher::dispatch($_SESSION['bioRelai']);
 			}
+			if ($UnUtilisateur->getStatut() == 'RESP') {
+					
+
+				$_SESSION['bioRelai'] = 'BioRelai';
+			include_once dispatcher::dispatch($_SESSION['bioRelai']);
+	}
 		}
 }
     include_once dispatcher::dispatch($_SESSION['bioRelai']);
