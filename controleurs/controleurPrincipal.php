@@ -61,7 +61,7 @@ if(isset($_POST["loginI"])){
 
 		//connex bdd
 		$maConnex = new DBConnex();
-		
+
 		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
 		//recup des login et MDP
 		$utilisateurDonnee = new UtilisateurDAO();
@@ -95,7 +95,7 @@ if(isset($_SESSION['unUtilisateur'])){
 					//redirection vert adherent
 						$_SESSION['bioRelai'] = 'Adherents';
 
-				    include_once dispatcher::dispatch($_SESSION['bioRelai']);
+				    //include_once dispatcher::dispatch($_SESSION['bioRelai']);
 			}
 		}
 }
