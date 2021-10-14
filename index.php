@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'lib/loader.php';
 session_start()?>
 
