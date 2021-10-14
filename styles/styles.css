@@ -1,11 +1,15 @@
-
 @charset "ISO-8859-1";
 *{
 	margin: 0;
 	padding: 0;
 }
 .conteneur{
-	background-color: #1a1b4a;
+	animation-duration: 25s;
+	  animation-name: couleurquichange;
+	  animation-iteration-count: infinite;
+	  animation-timing-function: linear;
+	
+
 }
 .img_fond{
 	max-width:100%;
@@ -14,13 +18,17 @@
 
     background: url("../images/bioRelai.png") no-repeat;
 	background-size: auto;
+	animation-duration: 3s;
+  	animation-name: opacit;
+
 }
+
 .header{
 	background-color: #554516;
 }
 nav.menuPrincipal{
 	text-align: right;
-	background-color:#333594;
+	background-color:#14c048;
 	font-size: 0px;
 }
 
@@ -39,11 +47,16 @@ nav.menuPrincipal ul li {
 	font-size: 20px;
 	font-weight: bold;
 	padding: 10px;
+
 }
 
 nav.menuPrincipal ul li a {
   text-decoration: none;
   color: white; 
+  animation-duration: 1s;
+  animation-name: glissade;
+  transition: color 2s;
+  
 }
 
 nav.menuPrincipal ul li a:hover {
@@ -58,3 +71,72 @@ nav.menuPrincipal ul li.actif {
 #texteBienvenue{
 	margin-left: 10%;
 }
+.card-text{
+	margin-top: 10px;
+	animation-duration: 1s;
+  	animation-name: opacitgentil;
+
+}
+#imgbg{
+	margin-top: 10px;
+	animation-duration: 4s;
+  	animation-name: glissadeimage;
+}
+@keyframes opacit {
+	from {
+		opacity: 0;
+	  width: 0%;
+	}
+  
+	to {
+		opacity: 1;
+	  margin-left: 0%;
+	  width: 100%;
+	}
+  }
+@keyframes glissade {
+	from {
+		opacity: 0 ;
+		margin-left: 100%;
+		width: 300%;
+	  }
+	
+	  to {
+		opacity: 1;
+		margin-left: 0%;
+		width: 100%;
+	  }
+  }
+  @keyframes glissadeimage {
+	from {
+		opacity: 0 ;
+		margin-left: 100%;
+	  }
+	
+	  to {
+		opacity: 1;
+		margin-left: 0%;
+	  }
+  }
+  @keyframes opacitgentil {
+	from {
+		opacity: 0 ;
+	  }
+	
+	  to {
+		opacity: 1;
+	  }
+  }
+  @keyframes couleurquichange {
+	0% {
+		background-color: #1a4a28;
+	}
+  
+	50% {
+		background-color: #14c048;
+
+	}
+	100% {
+		background-color: #1a4a28;
+	}
+  }
