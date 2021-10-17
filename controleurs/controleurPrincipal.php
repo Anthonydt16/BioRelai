@@ -14,6 +14,10 @@ if(isset($_GET['bioRelai'])){
 
 
 		}
+		elseif($UnUtilisateur->getStatut() == "Prod"){
+			$_SESSION['navBarRequete'] = $_GET['bioRelai'];
+			$_SESSION['bioRelai'] = "Producteur";
+		}
 		elseif($UnUtilisateur->getStatut() == 'RESP'){
 			$_SESSION['navBarRequete'] = $_GET['bioRelai'];
 					$_SESSION['bioRelai'] = 'BioRelai';
@@ -133,11 +137,16 @@ if(isset($_SESSION['unUtilisateur'])){
 
 				$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
 				if ($UnUtilisateur->getStatut() == 1) {
-					//redirection vert adherent
+					//redirection vers adherent
 						$_SESSION['bioRelai'] = 'Adherents';
 
 				    include_once dispatcher::dispatch($_SESSION['bioRelai']);
 			}
+			if ($UnUtilisateur->getStatut() == 'Prod') {
+						//redirection vers producteur
+						$_SESSION['bioRelai'] = 'Producteur';
+						include_once dispatcher::dispatch($_SESSION['bioRelai']);
+				}
 			if ($UnUtilisateur->getStatut() == 'RESP') {
 
 
