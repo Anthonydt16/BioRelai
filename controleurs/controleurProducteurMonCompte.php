@@ -1,7 +1,8 @@
 <?php
 
 // echo var_dump(unserialize($_SESSION['unUtilisateur']));
- echo var_dump($_SESSION['authentification']);
+// echo var_dump($_SESSION['authentification']);
+  //echo var_dump($_SESSION['authentification']['idUser']);
 
 
 

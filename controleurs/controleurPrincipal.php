@@ -115,6 +115,23 @@ if(isset($_POST["loginIMBio"])){
 	}
 }
 
+////////////partie producteur////////
+if(isset($_POST['mdp'], $_POST['Cmdp'], $_POST['nAdr'], $_POST['nComm'], $_POST['nCodeP'], $_POST['nPres'])){
+
+	if($_POST['mdp']== $_POST['Cmdp']){
+		ProducteurDAO::ModifCompteProducteur($_SESSION['authentification']['idUser'],$_POST['mdp'],$_POST['nAdr'], $_POST['nComm'], $_POST['nCodeP'], $_POST['nPres']);
+
+		$_POST['mdp']=null;
+		$_POST['Cmdp']=null;
+		$_POST['nAdr']=null;
+		$_POST['nComm']=null;
+		$_POST['nCodeP']=null;
+		$_POST['nPres']=null;
+	}
+
+}
+
+/////////////////////////////////////
 
 
 if(!isset($_SESSION['unUtilisateur'])){
