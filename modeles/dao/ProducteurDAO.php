@@ -1,8 +1,8 @@
 <?php
 class ProducteurDAO{
-    
-    
-    
+
+
+
     public static function ModifCompteProducteur($id,$mdp, $adrs, $commune, $codepostal, $presentation){
 
         DBConnex::getInstance()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -13,7 +13,7 @@ class ProducteurDAO{
         //$requete->execute();
 
 
-        $requete2 = DBConnex::getInstance()->prepare("UPDATE producteur SET adresseProduct = :adrs, communeProduct = :commune, codePostalProduct = :cp, presentationProduct = :presentation 
+        $requete2 = DBConnex::getInstance()->prepare("UPDATE producteur SET adresseProduct = :adrs, communeProduct = :commune, codePostalProduct = :cp, presentationProduct = :presentation
         WHERE producteur.idUser=:id; ");
         $requete2->bindParam(":adrs",$adrs);
         $requete2->bindParam(":id",$id);
@@ -29,6 +29,16 @@ class ProducteurDAO{
         DBConnex::getInstance()->commit();
     }
 
+    public static function recupProduits(){
+      $id=$_SESSION['authentification']['idUser'];
+
+      $requeteprepare = DBConnex::getInstance()->prepare("SELECT libelleProduit, descriptifProduit, nomCategorie FROM categories, produits
+      WHERE produits.mailProduct=(SELECT mailProduct FROM utilisateur WHERE idUser=8)
+      AND produits.idCategorie=categories.idCategorie;");
+
+
+    }
+
 
 
     //pour miss 1 faire avec le mail
@@ -36,7 +46,7 @@ class ProducteurDAO{
     // faire avec un select
     //
 
-    
 
 
-} 
+
+}
