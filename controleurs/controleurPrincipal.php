@@ -1,6 +1,12 @@
 <?php
+if(isset($_GET['idProduit'])){
+  echo $_GET['idProduit'];
+}
+//recup de la donnee
+if(isset($_GET['selectChoixq'])){
+	$_SESSION['selectChoixq'] = $_GET['selectChoixq'];
 
-
+}
 if(isset($_GET['bioRelai'])){
 
 	//verification si il faut le rediriger vers controleur adherent
@@ -65,7 +71,7 @@ if(isset($_POST["loginI"])){
 
 		//connex bdd
 		$maConnex = new DBConnex();
-		
+
 		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
 		//recup des login et MDP
 		$utilisateurDonnee = new UtilisateurDAO();
@@ -82,7 +88,7 @@ if(isset($_POST["loginIMBio"])){
 
 	if(!empty($_POST["loginIMBio"])){
 		$maConnex = new DBConnex();
-		
+
 		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
 		//recup des login et MDP
 		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
@@ -100,7 +106,7 @@ if(isset($_POST["loginIMBio"])){
 
 	if(!empty($_POST["loginIMBio"])){
 		$maConnex = new DBConnex();
-		
+
 		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
 		//recup des login et MDP
 		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
@@ -140,7 +146,7 @@ if(isset($_SESSION['unUtilisateur'])){
 				    include_once dispatcher::dispatch($_SESSION['bioRelai']);
 			}
 			if ($UnUtilisateur->getStatut() == 'RESP') {
-					
+
 
 				$_SESSION['bioRelai'] = 'BioRelai';
 			include_once dispatcher::dispatch($_SESSION['bioRelai']);
