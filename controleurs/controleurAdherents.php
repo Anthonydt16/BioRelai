@@ -17,7 +17,8 @@ if(!empty($_SESSION['navBarRequete'])){
   //ensuite on vide le session navBar
   $_SESSION['navBarRequete'] = [];
 }
-if(!empty($_SESSION['selectChoixq'])){
+echo $_SESSION['idProduit'];
+if(!isset($_SESSION['idProduit'])){
     $_SESSION['bioRelai'] = "AdherentsAchats";
   }
 

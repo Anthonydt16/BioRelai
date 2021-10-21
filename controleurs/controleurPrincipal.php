@@ -3,8 +3,8 @@ if(isset($_GET['idProduit'])){
   echo $_GET['idProduit'];
 }
 //recup de la donnee
-if(isset($_GET['selectChoixq'])){
-	$_SESSION['selectChoixq'] = $_GET['selectChoixq'];
+if(isset($_GET['idProduit'])){
+	$_SESSION['idProduit'] = $_GET['idProduit'];
 
 }
 if(isset($_GET['bioRelai'])){
