@@ -1,11 +1,9 @@
 <?php
 
-if(!empty($_SESSION['selectChoixq'])){
-  //on recup la quantite
-  echo $_SESSION['selectChoixq'];
-  $quantité = $_SESSION['selectChoixq'];
-  // et on la supprime
-  $_SESSION['selectChoixq'] = [];
+if(isset($_SESSION['idProduit'])){
+  $quantité = $_SESSION['idProduit'];
+  $_SESSION['idProduit'] = null;
+  echo "teste";
 }
 $produits = new ProduitDAO();
 
