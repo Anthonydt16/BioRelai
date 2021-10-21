@@ -17,5 +17,9 @@ if(!empty($_SESSION['navBarRequete'])){
   //ensuite on vide le session navBar
   $_SESSION['navBarRequete'] = [];
 }
+if(!empty($_SESSION['selectChoixq'])){
+    $_SESSION['bioRelai'] = "AdherentsAchats";
+  }
+
 
 include_once dispatcher::dispatch($_SESSION['bioRelai']);
