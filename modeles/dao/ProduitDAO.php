@@ -32,6 +32,11 @@ class ProduitDAO extends PDO{
       return $donnee;
   }
 
+  public static function ajouterProduit($libelle, $description, $categorie){
+    $mail=$_SESSION['authentification']['idUser'];//faire fct qui recup le mail avec l id
+    
+  }
+
 
 
 }

@@ -149,6 +149,7 @@ $bioRelai = new Menu("bioRelai");
 if($_SESSION['Compte'] == 'visiteur'){
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("Presentation", "Visiteurs"));
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("connexion", "Connexion"));
+    
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("inscription", "Inscription"));
 		$bioRelai->creerMenu('bioRelaiVisiteur','bioRelai');
 }

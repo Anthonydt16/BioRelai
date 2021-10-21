@@ -32,19 +32,20 @@ class ProducteurDAO{
     public static function recupProduits(){
       $id=$_SESSION['authentification']['idUser'];
 
-      $requeteprepare = DBConnex::getInstance()->prepare("SELECT libelleProduit, descriptifProduit, nomCategorie FROM categories, produits
-      WHERE produits.mailProduct=(SELECT mailProduct FROM utilisateur WHERE idUser=8)
+      $requeteprepa = DBConnex::getInstance()->prepare("SELECT libelleProduit, descriptifProduit, nomCategorie FROM categories, produits
+      WHERE produits.mailProduct=(SELECT mailProduct FROM utilisateur WHERE idUser=:id)
       AND produits.idCategorie=categories.idCategorie;");
+
+      $requeteprepa = bindParam(":id",$id);
+      $requetePrepa->execute();
+      $requete = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+      return $requete;
 
 
     }
 
 
 
-    //pour miss 1 faire avec le mail
-    //2 prendre sur mathis
-    // faire avec un select
-    //
 
 
 
