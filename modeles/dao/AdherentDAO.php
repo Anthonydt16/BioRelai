@@ -38,4 +38,15 @@ class adherentDAO extends PDO{
     $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
     return $donnee;
 }
+public static function ajoutDansLePanier($id,$CodeProduit,$quantite){
+  $requete = DBConnex::getInstance()->prepare("insert into `commander`  (:id, :CodeProduit,:quantite)");
+  $requete->bindParam(":id",$id);
+  $requete->bindParam(":CodeProduit",$CodeProduit);
+  $requete->bindParam(":quantite",$quantite);
+  $requete->execute();
+}
+
+
+
+
 }

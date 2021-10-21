@@ -25,5 +25,14 @@ class ProduitDAO extends PDO{
       return $requete;
   }
 
+  public function compteLeNbDeProduitCommande(){
+      $requete = DBConnex::getInstance()->prepare("SELECT count(*) FROM `commander`");
+      $requete->execute();
+      $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+      return $donnee;
+  }
+
+
+
 }
  ?>
