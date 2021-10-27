@@ -31,22 +31,35 @@ class adherentDAO extends PDO{
       $requete->execute();
       return $requete;
   }
-  public static function UNUtilisateurID($id){
+  public function UNUtilisateurID($id){
     $requete = DBConnex::getInstance()->prepare("SELECT * FROM `utilisateur` where idUser = :id ");
     $requete->bindParam(":id",$id);
     $requete->execute();
     $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
     return $donnee;
 }
-public static function ajoutDansLePanier($id,$CodeProduit,$quantite){
-  $requete = DBConnex::getInstance()->prepare("insert into `commander`  (:id, :CodeProduit,:quantite)");
+public function ajoutDansLePanier($id,$CodeProduit,$quantite){
+  $requete = DBConnex::getInstance()->prepare("insert into `commander`  VALUES (:id, :CodeProduit,:quantite)");
   $requete->bindParam(":id",$id);
   $requete->bindParam(":CodeProduit",$CodeProduit);
   $requete->bindParam(":quantite",$quantite);
   $requete->execute();
 }
 
+  public function ajoutdUneCommande($id,$dateCommande,$idAdherent,$idVente){
+    $requete = DBConnex::getInstance()->prepare("INSERT INTO `commandes` (`idCommande`, `dateCommande`, `idAdherent`, `idVente`, `Etat`) VALUES (:id, :dateCommande, :idAdherent, :idVente, 'Attente')");
+    $requete->bindParam(":id",$id);
+    $requete->bindParam(":dateCommande",$dateCommande);
+    $requete->bindParam(":idAdherent",$idAdherent);
+    $requete->bindParam(":idVente",$idVente);
+    $requete->execute();
+  }
 
 
-
+  public function affichagePanier(){
+      $requete = DBConnex::getInstance()->prepare("SELECT * FROM `commander`");
+      $requete->execute();
+      $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+      return $donnee;
+  }
 }
