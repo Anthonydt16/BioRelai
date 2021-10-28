@@ -136,6 +136,10 @@ if(isset($_POST['mdp'], $_POST['Cmdp'], $_POST['nAdr'], $_POST['nComm'], $_POST[
 	}
 
 }
+//Ajouter un produit
+if(isset($_POST['ajtP'])){
+  ProduitDAO::ajouterProduit($_POST['alibP'],$_POST['adesP'],$_POST['acatP']);
+}
 
 /////////////////////////////////////
 
@@ -149,7 +153,7 @@ $bioRelai = new Menu("bioRelai");
 if($_SESSION['Compte'] == 'visiteur'){
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("Presentation", "Visiteurs"));
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("connexion", "Connexion"));
-    
+
     $bioRelai->ajouterComposant($bioRelai->creerItemLien("inscription", "Inscription"));
 		$bioRelai->creerMenu('bioRelaiVisiteur','bioRelai');
 }

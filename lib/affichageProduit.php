@@ -12,4 +12,16 @@ class affichageProduit{
     }
 
   }
+
+  public static function afficherProduits($tabProduits){
+    foreach ($tabProduits as $key) {
+      echo'<div class="card" style="width: 18rem;">';
+      echo'<div class="card-body">';
+      echo'<h5 class="card-title">'.$key['libelleProduit'].' de la categorie: '.$key['nomCategorie'].'</h5>';
+      echo'<p class="card-text">Description : '.$key['descriptifProduit'].' </p>';
+      //echo '<button type="submit" class="btn" onclick=window.location.href="index.php?idProduit='.$key['codeProduit'].'"><span class="fas fa-shopping-cart"></span></button></p>';
+      echo'</div>';
+      echo'</div>';
+  }
+}
 }

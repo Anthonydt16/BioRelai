@@ -36,15 +36,22 @@ class ProducteurDAO{
       WHERE produits.mailProduct=(SELECT mailProduct FROM utilisateur WHERE idUser=:id)
       AND produits.idCategorie=categories.idCategorie;");
 
-      $requeteprepa = bindParam(":id",$id);
-      $requetePrepa->execute();
-      $requete = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+      $requeteprepa->bindParam(":id",$id);
+      $requeteprepa->execute();
+      $requete = $requeteprepa->fetchAll(PDO::FETCH_ASSOC);
       return $requete;
 
 
     }
 
-
+    public static function recupMailP(){
+      $id=$_SESSION['authentification']['idUser'];
+      $requeteprepa = DBConnex::getInstance()->prepare("SELECT mailProduct FROM producteur WHERE idUser=:id");
+      $requeteprepa->bindParam(":id",$id);
+      $requeteprepa->execute();
+      $requete = $requeteprepa->fetch();
+      return $requete;
+    }
 
 
 

@@ -38,9 +38,16 @@ class ProduitDAO extends PDO{
       return $donnee;
   }
 
-  public static function ajouterProduit($libelle, $description, $categorie){
-    $mail=$_SESSION['authentification']['idUser'];//faire fct qui recup le mail avec l id
-
+  public static function ajouterProduit($libelle, $description, $idcategorie){
+    $mail=ProducteurDAO::recupMailP();
+    $requeteprepa = DBConnex::getInstance()->prepare("INSERT INTO `produits`
+      (`codeProduit`, `libelleProduit`, `descriptifProduit`, `mailProduct`, `idCategorie`)
+      VALUES ( null, :libelle, :descriptif, :mail, :idcat); ");
+    $requeteprepa->bindParam(":mail",$mail['mailProduct']);
+    $requeteprepa->bindParam(":libelle",$libelle);
+    $requeteprepa->bindParam(":descriptif",$description);
+    $requeteprepa->bindParam(":idcat",$idcategorie);
+    $requeteprepa->execute();
   }
 
 

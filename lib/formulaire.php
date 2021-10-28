@@ -65,6 +65,27 @@ class Formulaire{
 		return $composant;
 	}
 
+public function creerInputDescription($unNom, $unId, $uneValue , $required , $placeholder , $pattern,$class, $rows){
+		$composant = "<input  class='".$class."' type = 'text' name = '" . $unNom . "' id = '" . $unId . "' ";
+		if (!empty($uneValue)){
+			$composant .= "value = '" . $uneValue . "' ";
+		}
+		if (!empty($placeholder)){
+			$composant .= "placeholder = '" . $placeholder . "' ";
+		}
+		if ( $required = 1){
+			$composant .= "required ";
+		}
+		if (!empty($pattern)){
+			$composant .= "pattern = '" . $pattern . "' ";
+		}
+		if ($rows > 1){
+			$composant .= "rows = '" . $rows . "' ";
+		}
+		$composant .= "/>";
+		return $composant;
+	}
+
 
 	public function creerInputMdp($unNom, $unId,  $required , $placeholder , $pattern,$class){
 		$composant = "<input  class='".$class."' type = 'password' name = '" . $unNom . "' id = '" . $unId . "' ";
@@ -92,6 +113,15 @@ class Formulaire{
 			$composant .= "<option value = ".$option.">".$option."</option>" ;
 		}
 		$composant .= "</select></td></tr>";
+		return $composant;
+	}
+
+	public function creerSelectID($unNom, $unId, $tabIntitule, $tabId){
+		$composant = "<select  name = " . $unNom . " id = " . $unId . ">";
+		for ($i=0;$i<count($tabId);$i++){
+			$composant .= "<option value = ".$tabId[$i].">". $tabIntitule[$i] ."</option>" ;
+		}
+		$composant .= "</select>";
 		return $composant;
 	}
 
