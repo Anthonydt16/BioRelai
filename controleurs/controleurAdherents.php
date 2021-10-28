@@ -21,5 +21,10 @@ if(!empty($_SESSION['idProduit'])){
     $_SESSION['bioRelai'] = "AdherentsAchats";
   }
 
+  if(!empty($_GET['quantite1'])){
+      $_SESSION['bioRelai'] = "AdherentsPanier";
+    }
+
+
 
 include_once dispatcher::dispatch($_SESSION['bioRelai']);

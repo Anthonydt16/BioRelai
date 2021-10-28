@@ -79,5 +79,14 @@ class ProduitDAO extends PDO{
 
 
 
+      public function quantiteProduit($id){
+        $requete = DBConnex::getInstance()->prepare("SELECT quantite FROM `proposer` where codeProduit = :id");
+          $requete->bindParam(":id",$id);
+        $requete->execute();
+        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $donnee;
+      }
+
+
 }
  ?>
