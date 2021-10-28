@@ -137,8 +137,11 @@ if(isset($_POST['mdp'], $_POST['Cmdp'], $_POST['nAdr'], $_POST['nComm'], $_POST[
 
 }
 //Ajouter un produit
-if(isset($_POST['ajtP'])){
+if(isset($_POST['alibP'],$_POST['adesP'],$_POST['acatP'])){
   ProduitDAO::ajouterProduit($_POST['alibP'],$_POST['adesP'],$_POST['acatP']);
+  $_POST['alibP']=null;
+  $_POST['adesP']=null;
+  $_POST['acatP']=null;
 }
 
 /////////////////////////////////////
