@@ -30,13 +30,14 @@ class ProducteurDAO{
     }
 
     public static function recupProduits(){
-      $id=$_SESSION['authentification']['idUser'];
+
+      $mail=ProducteurDAO::recupMailP();
 
       $requeteprepa = DBConnex::getInstance()->prepare("SELECT libelleProduit, descriptifProduit, nomCategorie FROM categories, produits
-      WHERE produits.mailProduct=(SELECT mailProduct FROM utilisateur WHERE idUser=:id)
+      WHERE mailProduct=:mail
       AND produits.idCategorie=categories.idCategorie;");
 
-      $requeteprepa->bindParam(":id",$id);
+      $requeteprepa->bindParam(":mail",$mail['mailProduct']);
       $requeteprepa->execute();
       $requete = $requeteprepa->fetchAll(PDO::FETCH_ASSOC);
       return $requete;
@@ -51,6 +52,19 @@ class ProducteurDAO{
       $requeteprepa->execute();
       $requete = $requeteprepa->fetch();
       return $requete;
+    }
+
+    public static function recupIdNom(){
+      $mail=ProducteurDAO::recupMailP();
+
+      $requeteprepa = DBConnex::getInstance()->prepare("SELECT codeProduit, libelleProduit FROM produits
+      WHERE mailProduct=:mail;");
+
+      $requeteprepa->bindParam(":mail",$mail['mailProduct']);
+      $requeteprepa->execute();
+      $requete = $requeteprepa->fetchAll(PDO::FETCH_ASSOC);
+      return $requete;
+
     }
 
 

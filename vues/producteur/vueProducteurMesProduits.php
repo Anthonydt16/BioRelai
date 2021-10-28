@@ -19,6 +19,32 @@ include_once ('vues/vueHaut.php');
       </div>
   </div>
   </main>
+  <main>
+  <div id="texteBienvenue" class="card" style="width: 80%;">
+      <div class='titre'><h5>Supprimer un Produit</h5></div>
+        <div class="card-body">
+        <div class="form-group">
+            <?php
+              $formulaireSupprimerProduit->afficherFormulaire();
+            ?>
+        </div>
+        </div>
+      </div>
+  </div>
+  </main>
+  <main>
+  <div id="texteBienvenue" class="card" style="width: 80%;">
+      <div class='titre'><h5>Modifier un Produit</h5></div>
+        <div class="card-body">
+        <div class="form-group">
+            <?php
+              $formulaireModifierProduit->afficherFormulaire();
+            ?>
+        </div>
+        </div>
+      </div>
+  </div>
+  </main>
 </div>
 <div>
     <?php

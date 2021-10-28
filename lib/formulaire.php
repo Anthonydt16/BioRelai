@@ -131,6 +131,10 @@ public function creerInputDescription($unNom, $unId, $uneValue , $required , $pl
 		return $composant;
 
 	}
+	public function creerInputHidden($unNom, $unId, $uneValue){
+		$composant= "<input type ='hidden' name = '" . $unNom . "' id = '" . $unId . "' value = '" . $uneValue . "' />";
+		return $composant;
+	}
 	public function creerButonSubmit($unNom, $unId, $uneValue, $class){
 		$composant = "<button  class='".$class."' type = 'submit'  class='".$class."' name = '" . $unNom . "' id = '" . $unId . "'> ";
 		$composant .= $uneValue."</button ";

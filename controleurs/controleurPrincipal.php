@@ -121,7 +121,7 @@ if(isset($_POST["loginIMBio"])){
 	}
 }
 
-////////////partie producteur////////
+////////////partie producteur///////////////////////////////////////////////////////////////
 if(isset($_POST['mdp'], $_POST['Cmdp'], $_POST['nAdr'], $_POST['nComm'], $_POST['nCodeP'], $_POST['nPres'])){
 
 	if($_POST['mdp']== $_POST['Cmdp']){
@@ -144,7 +144,22 @@ if(isset($_POST['alibP'],$_POST['adesP'],$_POST['acatP'])){
   $_POST['acatP']=null;
 }
 
-/////////////////////////////////////
+//Supprimer un produit
+if(isset($_POST['psupp'])){
+  ProduitDAO::supprimerProduit($_POST['psupp']);
+  $_POST['psupp']=null;
+}
+
+//Modifier un produit
+if(isset($_POST['mlibP'],$_POST['mdesP'],$_POST['mcatP'],$_POST['idP'])){
+  ProduitDAO::modifierProduit($_POST['idP'],$_POST['mlibP'],$_POST['mdesP'],$_POST['mcatP']);
+  $_POST['mlibP']=null;
+  $_POST['mdesP']=null;
+  $_POST['mcatP']=null;
+  $_POST['idP']=null;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 
 if(!isset($_SESSION['unUtilisateur'])){

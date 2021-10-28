@@ -58,6 +58,25 @@ class ProduitDAO extends PDO{
     return $donnee;
   }
 
+  public static function supprimerProduit($id){
+    $requete = DBConnex::getInstance()->prepare("DELETE FROM produits WHERE codeProduit=:id");
+    $requete->bindParam(":id",$id);
+    $requete->execute();
+
+  }
+
+  public static function modifierProduit($id, $libelle, $description, $idcategorie){
+    $mail=ProducteurDAO::recupMailP();
+    $requeteprepa = DBConnex::getInstance()->prepare("UPDATE produits
+      SET libelleProduit=:lib, descriptifProduit=:descr, idCategorie=:idcat WHERE mailProduct=:mail AND codeProduit=:id;");
+    $requeteprepa->bindParam(":mail",$mail['mailProduct']);
+    $requeteprepa->bindParam(":lib",$libelle);
+    $requeteprepa->bindParam(":descr",$description);
+    $requeteprepa->bindParam(":idcat",$idcategorie);
+    $requeteprepa->bindParam(":id",$id);
+    $requeteprepa->execute();
+  }
+
 
 
 }
