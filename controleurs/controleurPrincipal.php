@@ -159,6 +159,16 @@ if(isset($_POST['mlibP'],$_POST['mdesP'],$_POST['mcatP'],$_POST['idP'])){
   $_POST['idP']=null;
 }
 
+//proposer un produit à la ventes
+if(isset($_POST['prodP'],$_POST['idV'],$_POST['quantiteP'],$_POST['prixP'],$_POST['uniteP'])){
+  ProducteurDAO::proposer($_POST['prodP'],$_POST['idV'],$_POST['quantiteP'],$_POST['prixP'],$_POST['uniteP']);
+  $_POST['prodP']=null;
+  $_POST['idV']=null;
+  $_POST['quantiteP']=null;
+  $_POST['prixP']=null;
+  $_POST['uniteP']=null;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 

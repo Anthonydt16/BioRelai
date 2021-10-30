@@ -67,6 +67,38 @@ class ProducteurDAO{
 
     }
 
+    public static function venteDispo(){
+      $requeteprepa = DBConnex::getInstance()->prepare("SELECT dateDebutProd, dateFinProd FROM ventes");
+      $requeteprepa->execute();
+      $ventes = $requeteprepa->fetchAll(PDO::FETCH_ASSOC);
+      $date=ProducteurDAO::laDate();
+      foreach($ventes as $vente){
+        if($date <= $vente['dateFinProd'] && $date >= $vente['dateDebutProd']){
+          return ['bool' => True, 'debut' => $vente['dateDebutProd'], 'fin' => $vente['dateFinProd']];
+        }
+      }
+      return False;
+
+    }
+
+    public static function laDate(){
+      $requeteprepa = DBConnex::getInstance()->prepare("SELECT CURRENT_DATE()");
+      $requeteprepa->execute();
+      $requete = $requeteprepa->fetch();
+      return $requete['CURRENT_DATE()'];
+    }
+
+    public static function proposer($produit,$vente,$quantite,$prix,$unite){
+      $requeteprepa = DBConnex::getInstance()->prepare("INSERT INTO proposer
+        VALUES(:produit,:vente,:quantite,:prix,:unite) ");
+      $requeteprepa->bindParam(":produit",$produit);
+      $requeteprepa->bindParam(":vente",$vente);
+      $requeteprepa->bindParam(":quantite",$quantite);
+      $requeteprepa->bindParam(":prix",$prix);
+      $requeteprepa->bindParam(":unite",$unite);
+      $requeteprepa->execute();
+    }
+
 
 
 

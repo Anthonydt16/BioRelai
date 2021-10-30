@@ -11,6 +11,7 @@ for($i=0;$i<count($tabN);$i++) {
   $tabVN[$i]=$tabN[$i]['nomCategorie'];
 }
 
+//créer 2 tableaux contenant les id et nom des produits
 $tabS=ProducteurDAO::recupIdNom();
 for($i=0;$i<count($tabS);$i++) {
   $tabidS[$i]=$tabS[$i]['codeProduit'];

@@ -65,6 +65,21 @@ class Formulaire{
 		return $composant;
 	}
 
+	public function creerInputNombre($unNom, $unId, $unMax , $required , $placeholder , $pattern,$class){
+		$composant = "<input  class='".$class."' type = 'number' min = '1' max = '" . $unMax . "'  name = '" . $unNom . "' id = '" . $unId . "' ";
+		if (!empty($placeholder)){
+			$composant .= "placeholder = '" . $placeholder . "' ";
+		}
+		if ( $required = 1){
+			$composant .= "required ";
+		}
+		if (!empty($pattern)){
+			$composant .= "pattern = '" . $pattern . "' ";
+		}
+		$composant .= "/>";
+		return $composant;
+	}
+
 public function creerInputDescription($unNom, $unId, $uneValue , $required , $placeholder , $pattern,$class, $rows){
 		$composant = "<input  class='".$class."' type = 'text' name = '" . $unNom . "' id = '" . $unId . "' ";
 		if (!empty($uneValue)){
