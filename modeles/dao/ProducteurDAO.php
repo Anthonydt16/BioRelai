@@ -99,6 +99,25 @@ class ProducteurDAO{
       $requeteprepa->execute();
     }
 
+    public static function suppProposer($idV,$idProduit){
+      $requeteprepa = DBConnex::getInstance()->prepare("DELETE FROM proposer
+        WHERE codeProduit=:produit AND idVente=:vente;");
+      $requeteprepa->bindParam(":vente",$idV);
+      $requeteprepa->bindParam(":produit",$idProduit);
+      $requeteprepa->execute();
+    }
+
+    public static function modifProposer($produit,$vente,$quantite,$prix,$unite){
+      $requeteprepa = DBConnex::getInstance()->prepare("UPDATE proposer
+        SET quantite=:quantite, prix=:prix, unite=:unite WHERE codeProduit=:produit AND idVente=:vente;");
+      $requeteprepa->bindParam(":produit",$produit);
+      $requeteprepa->bindParam(":vente",$vente);
+      $requeteprepa->bindParam(":quantite",$quantite);
+      $requeteprepa->bindParam(":prix",$prix);
+      $requeteprepa->bindParam(":unite",$unite);
+      $requeteprepa->execute();
+    }
+
 
 
 

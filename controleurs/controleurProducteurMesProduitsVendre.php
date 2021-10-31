@@ -43,8 +43,41 @@ $formulaireProposerProduit->ajouterComposantTab();
 
 $formulaireProposerProduit->creerFormulaire();
 
+$t=VenteDAO::recupIdNomProdProposer($idV);
 
 
+$formulaireSupprimerProposer= new Formulaire('post', '?bioRelai=producteurMesProduitsVendre','ssP','ssP');
+
+$formulaireSupprimerProposer->ajouterComposantLigne($formulaireSupprimerProposer->creerLabel('Produit à supprimer : ','label'));
+$formulaireSupprimerProposer->ajouterComposantLigne($formulaireSupprimerProposer->creerSelectID('SprodP','SprodP',$t[1],$t[0]));
+$formulaireSupprimerProposer->ajouterComposantTab();
+
+$formulaireSupprimerProposer->ajouterComposantLigne($formulaireSupprimerProposer-> creerInputHidden('idV','idV',$idV));
+$formulaireSupprimerProposer->ajouterComposantTab();
+
+$formulaireSupprimerProposer->ajouterComposantLigne($formulaireSupprimerProposer-> creerInputSubmit('sP', 'sP', 'Supprimer',"btn btn-light btn-lg btn-block"));
+$formulaireSupprimerProposer->ajouterComposantTab();
+
+$formulaireSupprimerProposer->creerFormulaire();
+
+
+
+$formulaireModifierProposer= new Formulaire('post', '?bioRelai=producteurModifProposer','ssP','ssP');
+
+$formulaireModifierProposer->ajouterComposantLigne($formulaireModifierProposer->creerLabel('Produit à modifier : ','label'));
+$formulaireModifierProposer->ajouterComposantLigne($formulaireModifierProposer->creerSelectID('MprodP','SprodP',$t[1],$t[0]));
+$formulaireModifierProposer->ajouterComposantTab();
+
+$formulaireModifierProposer->ajouterComposantLigne($formulaireModifierProposer-> creerInputHidden('idV','idV',$idV));
+$formulaireModifierProposer->ajouterComposantTab();
+
+$formulaireModifierProposer->ajouterComposantLigne($formulaireModifierProposer-> creerInputSubmit('sP', 'sP', 'Modifier',"btn btn-light btn-lg btn-block"));
+$formulaireModifierProposer->ajouterComposantTab();
+
+$formulaireModifierProposer->creerFormulaire();
+
+
+$e=2;
 }
 else {//sinon
 $e=1;

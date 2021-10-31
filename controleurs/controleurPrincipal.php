@@ -169,6 +169,24 @@ if(isset($_POST['prodP'],$_POST['idV'],$_POST['quantiteP'],$_POST['prixP'],$_POS
   $_POST['uniteP']=null;
 }
 
+//supprimer une proposition de vente d'un produit
+if(isset($_POST['SprodP'],$_POST['idV'])){
+  ProducteurDAO::suppProposer($_POST['idV'],$_POST['SprodP']);
+  $_POST['idV']=null;
+  $_POST['SprodP']=null;
+}
+
+//modifier une proposition de vente d'un produit
+if(isset($_POST['idP'],$_POST['idV'],$_POST['mquantiteP'],$_POST['mprixP'],$_POST['muniteP'])){
+
+  ProducteurDAO::modifProposer($_POST['idP'],$_POST['idV'],$_POST['mquantiteP'],$_POST['mprixP'],$_POST['muniteP']);
+  $_POST['idP']=null;
+  $_POST['idV']=null;
+  $_POST['mquantiteP']=null;
+  $_POST['mprixP']=null;
+  $_POST['muniteP']=null;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 

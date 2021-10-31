@@ -33,4 +33,15 @@ public static function afficherPasDeVente(){
     echo'</div>';
 }
 
+public static function afficherProduitsProposer($tabProduits){
+  foreach ($tabProduits as $key) {
+    echo'<div class="card" style="width: 18rem;">';
+    echo'<div class="card-body">';
+    echo'<h5 class="card-title">'.$key['quantite'].' '.$key['libelleProduit'].'(s)'.'</h5>';
+    echo'<p class="card-text">Vendu(e)(s) : '.$key['prix'].' €/ '.$key['unite'].'</p>';
+    echo'</div>';
+    echo'</div>';
+}
+}
+
 }
