@@ -73,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `commander` (
   `idCommande` int(11) NOT NULL,
   `codeProduit` int(11) NOT NULL,
   `quantite` decimal(12,0) NOT NULL,
-  `Etat` varchar(30) NOT NULL,
   PRIMARY KEY (`idCommande`,`codeProduit`),
   KEY `Commander_Produits0_FK` (`codeProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
