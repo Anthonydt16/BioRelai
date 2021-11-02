@@ -44,7 +44,16 @@ class VenteDAO{
 
   }
 
-
+  public static function recupVentesPassees(){//récupère toutes les ventes passées où le producteur a eu une commande
+    $mail=ProducteurDAO::recupMailP();
+    $requeteprepa = DBConnex::getInstance()->prepare("SELECT DISTINCT ventes.idVente, dateVente FROM ventes,commander,commandes,produits
+      WHERE dateVente<CURRENT_DATE() AND mailProduct=:mail AND ventes.idVente=commandes.idVente
+      AND commandes.idCommande=commander.idCommande AND commander.codeProduit=produits.codeProduit");
+    $requeteprepa->bindParam(":mail",$mail['mailProduct']);
+    $requeteprepa->execute();
+    $requete = $requeteprepa->fetchAll(PDO::FETCH_ASSOC);
+    return $requete;
+  }
 
 
 

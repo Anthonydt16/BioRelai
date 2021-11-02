@@ -6,6 +6,7 @@ class CommandesDAO{
          WHERE idVente='1' AND Etat='Validée' AND commandes.idAdherent=adherent.idAdherent
          AND adherent.idUser=utilisateur.idUser AND commandes.idCommande=commander.idCommande
          AND commander.codeProduit=produits.codeProduit;");
+         //AND mailProduct=:mail
       //$requeteprepa->bindParam(":vente",$idV);
       $requeteprepa->execute();
       $requete = $requeteprepa->fetchAll(PDO::FETCH_ASSOC);

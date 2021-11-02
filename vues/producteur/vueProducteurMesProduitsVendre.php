@@ -39,7 +39,7 @@ include_once ('vues/vueHaut.php');
   </main>
   <main>
   <div id="texteBienvenue" class="card" style="width: 80%;">
-      <div class='titre'><h5>Supprimer une proposition de vente d'un produit</h5></div>
+      <div class='titre'><h5>Modifier une proposition de vente d'un produit</h5></div>
         <div class="card-body">
         <div class="form-group">
             <?php

@@ -16,6 +16,5 @@ else {//sinon
 $e=1;
 }
 
-var_dump(CommandesDAO::recupCommandesEnCours($idV));
 
 require_once 'vues/producteur/vueProducteurCommandesEnCours.php';

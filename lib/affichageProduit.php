@@ -49,7 +49,7 @@ public static function afficherCommandesEnCours($tabCommandes){
     echo'<div class="card" style="width: 18rem;">';
     echo'<div class="card-body">';
     echo'<h5 class="card-title">'.$key['prenomUser'].' '.$key['nomUser'].' a commandé'.'</h5>';
-    echo'<p class="card-text">'.$key['quantite'].' '.$key['libelleProduit'].'</p>';
+    echo'<p class="card-text">'.$key['quantite'].' '.$key['libelleProduit'].'(s)'.'</p>';
     echo'</div>';
     echo'</div>';
 }
