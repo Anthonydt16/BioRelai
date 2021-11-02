@@ -15,7 +15,7 @@ $dispo=ProducteurDAO::venteDispo();
 //Si une vente est disponible
 if($dispo['bool']==True){
 
-$idV=VenteDAO::recupIdVente($dispo['debut'],$dispo['fin']);// creer fct
+$idV=VenteDAO::recupIdVente($dispo['debut'],$dispo['fin']);
 
 $formulaireProposerProduit= new Formulaire('post', '?bioRelai=producteurMesProduitsVendre','pP','pP');
 

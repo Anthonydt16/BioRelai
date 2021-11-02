@@ -44,4 +44,17 @@ public static function afficherProduitsProposer($tabProduits){
 }
 }
 
+public static function afficherCommandesEnCours($tabCommandes){
+  foreach ($tabCommandes as $key) {
+    echo'<div class="card" style="width: 18rem;">';
+    echo'<div class="card-body">';
+    echo'<h5 class="card-title">'.$key['prenomUser'].' '.$key['nomUser'].' a commandé'.'</h5>';
+    echo'<p class="card-text">'.$key['quantite'].' '.$key['libelleProduit'].'</p>';
+    echo'</div>';
+    echo'</div>';
+}
+}
+
+
+
 }
