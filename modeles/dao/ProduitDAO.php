@@ -83,10 +83,26 @@ class ProduitDAO extends PDO{
         $requete = DBConnex::getInstance()->prepare("SELECT quantite FROM `proposer` where codeProduit = :id");
           $requete->bindParam(":id",$id);
         $requete->execute();
-        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
       }
 
+      public function validerQuantite($id,$quantite){
+
+        $requete = DBConnex::getInstance()->prepare("UPDATE `commander` SET `quantite` = :quantite WHERE `commander`.`codeProduit` = :id;");
+        $requete->bindParam(":id",$id);
+        $requete->bindParam(":quantite",$quantite);
+        $requete->execute();
+      }
+
+      public function updateQuantite($idProduit,$quantite){
+        // il faut specifier l'id vente mais attendre modif de la base de données :  AND `proposer`.`idVente` = 1;
+        $requete = DBConnex::getInstance()->prepare("UPDATE `proposer` SET `quantite` = :quantite WHERE `proposer`.`codeProduit` = :idProduit");
+        $requete->bindParam(":idProduit",$idProduit);
+        $requete->bindParam(":quantite",$quantite);
+        $requete->execute();
+
+      }
 
 }
  ?>

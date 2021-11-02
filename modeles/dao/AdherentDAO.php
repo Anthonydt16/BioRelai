@@ -62,4 +62,13 @@ public function ajoutDansLePanier($id,$CodeProduit,$quantite){
       $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;
   }
+
+  public function validationcommande(){
+    $requete = DBConnex::getInstance()->prepare("INSERT INTO `commandes` (`idCommande`, `dateCommande`, `idAdherent`, `idVente`, `Etat`) VALUES (:id, :dateCommande, :idAdherent, :idVente, 'Attente')");
+    $requete->bindParam(":id",$id);
+    $requete->bindParam(":dateCommande",$dateCommande);
+    $requete->bindParam(":idAdherent",$idAdherent);
+    $requete->bindParam(":idVente",$idVente);
+    $requete->execute();
+  }
 }

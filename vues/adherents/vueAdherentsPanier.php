@@ -32,10 +32,11 @@ include_once ('vues/vueHaut.php');
                   echo "<td>";
                   echo '<select name="quantite'.$j.'" id="quantite'.$j.'">';
                   //recup des quantite
-                  foreach ($produits->quantiteProduit($j) as $key => $value) {
-                    $quantite = $value['quantite'];
+
+                    $quantite = $produits->quantiteProduit($j)['quantite'];
                     $quantite++;
-                  }
+                    echo $quantite++;
+
                   //mis dans le select des nb quantité
                   for ($k=0; $k <$quantite; $k++) {
                     if(!empty($tabQuantiteChoix)){
