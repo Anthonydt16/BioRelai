@@ -3,25 +3,31 @@
 $adherent = new adherentDAO();
 $produits = new ProduitDAO();
 
-  if(!empty($_GET['quantite1'])){
+  if(!empty($_GET['panierValid'])){
     $tabQuantiteChoix = [];
+// penser a filter la requete avec l'id de la commande
+    foreach ($adherent->affichagePanierPrecis($_SESSION['idCommandes']) as $key => $value) {
 
-    for ($i=1; $i <count($adherent->affichagePanier())+1 ; $i++) {
-        array_push($tabQuantiteChoix,$_GET['quantite'.$i.'']);
-        $produits->validerQuantite($i,$_GET['quantite'.$i.'']);
+      if($value['idCommande'] ==  $_SESSION['idCommandes']){
+        array_push($tabQuantiteChoix,$_GET['quantite'.$value['codeProduit'].'']);
+        $produits->validerQuantite($value['codeProduit'],$_SESSION['idCommandes'],$_GET['quantite'.$value['codeProduit'].'']);
 
-        var_dump($produits->quantiteProduit($i));
-        $quantitedebase=$produits->quantiteProduit($i)["quantite"];
+        $quantitedebase=$produits->quantiteProduit($value['codeProduit'])["quantite"];
 
-        //fonction update de quantite
-        //FAIRE LA FONCTION QUAND LE PANIER EST VALIDER
-        $produits->updateQuantite($i,($quantitedebase - $_GET['quantite'.$i.'']));
+        //optimiser cette partie pour eviter si on reload la page encore une exe de la requete
+        $produits->updateQuantite($value['codeProduit'],($quantitedebase - $_GET['quantite'.$value['codeProduit'].'']));
+        echo $_SESSION['idCommandes'];
+        $produits->validerPanier($_SESSION['idCommandes']);
+    }
+
+
     }
 
   }
-  if(!empty($_GET['panierValid'])){
-    echo "valider";
+  if(!empty($_GET['suppProduit'])&&!empty($_GET['suppCommande'])){
+    $produits->supprimerProduitDuPanier($_GET['suppProduit'], $_GET['suppCommande']);
 
+    echo 'supprimer';
   }
 
 $EnTete = array("produit", "prix unité", "quantité","supprimer");

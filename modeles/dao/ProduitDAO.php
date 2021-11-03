@@ -19,7 +19,7 @@ class ProduitDAO extends PDO{
       }
   }
   public function affichageProduitEnvente(){
-      $requete = DBConnex::getInstance()->prepare("SELECT p.*,c.nomCategorie,pro.communeProduct,pro.codePostalPoduct,pro.adresseProduct,propo.quantite,propo.unite,propo.prix  from produits as p, categories as c, producteur as pro, proposer as propo where c.idCategorie = p.idCategorie and propo.codeProduit = p.codeProduit and pro.mailProduct = p.mailProduct ");
+      $requete = DBConnex::getInstance()->prepare("SELECT p.*,c.nomCategorie,pro.communeProduct,pro.codePostalProduct,pro.adresseProduct,propo.quantite,propo.unite,propo.prix from produits as p, categories as c, producteur as pro, proposer as propo where c.idCategorie = p.idCategorie and propo.codeProduit = p.codeProduit and pro.mailProduct = p.mailProduct ");
       $requete->execute();
       $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;
@@ -65,6 +65,14 @@ class ProduitDAO extends PDO{
 
   }
 
+  public static function supprimerProduitDuPanier($idProduit, $idCommande){
+    $requete = DBConnex::getInstance()->prepare("DELETE FROM commander WHERE idCommande=:idCommande and codeProduit = :id");
+    $requete->bindParam(":id",$idProduit);
+    $requete->bindParam(":idCommande",$idCommande);
+    $requete->execute();
+
+  }
+
   public static function modifierProduit($id, $libelle, $description, $idcategorie){
     $mail=ProducteurDAO::recupMailP();
     $requeteprepa = DBConnex::getInstance()->prepare("UPDATE produits
@@ -87,22 +95,40 @@ class ProduitDAO extends PDO{
         return $donnee;
       }
 
-      public function validerQuantite($id,$quantite){
+      public function validerQuantite($id,$idCommande,$quantite){
 
-        $requete = DBConnex::getInstance()->prepare("UPDATE `commander` SET `quantite` = :quantite WHERE `commander`.`codeProduit` = :id;");
+        $requete = DBConnex::getInstance()->prepare("UPDATE `commander` SET `quantite` = :quantite WHERE `commander`.`codeProduit` = :id  and idCommande = :idCommande;");
         $requete->bindParam(":id",$id);
+        $requete->bindParam(":idCommande",$idCommande);
         $requete->bindParam(":quantite",$quantite);
         $requete->execute();
       }
 
       public function updateQuantite($idProduit,$quantite){
         // il faut specifier l'id vente mais attendre modif de la base de données :  AND `proposer`.`idVente` = 1;
-        $requete = DBConnex::getInstance()->prepare("UPDATE `proposer` SET `quantite` = :quantite WHERE `proposer`.`codeProduit` = :idProduit");
+        $requete = DBConnex::getInstance()->prepare("UPDATE `proposer` SET `quantite` = :quantite WHERE `proposer`.`codeProduit` = :idProduit  ");//idCommande = :idCommande
         $requete->bindParam(":idProduit",$idProduit);
+        //$requete->bindParam(":idCommande",$idCommande);
         $requete->bindParam(":quantite",$quantite);
         $requete->execute();
 
       }
+      public function recupCommandes(){
+        $requete = DBConnex::getInstance()->prepare("SELECT * FROM `Commandes`");
+        $requete->execute();
+        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $donnee;
+      }
+
+      public function validerPanier($idCommande){
+        $requete = DBConnex::getInstance()->prepare("UPDATE `commandes` SET `Etat` = 'valider' WHERE `commandes`.`idCommande` = :idCommande;");
+        $requete->bindParam(":idCommande",$idCommande);
+        $requete->execute();
+
+      }
+
+
+
 
 }
  ?>

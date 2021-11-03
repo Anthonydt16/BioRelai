@@ -1,7 +1,12 @@
 <?php
 class VenteDAO{
 
-
+  public static function affichageVentes(){
+    $requete = DBConnex::getInstance()->prepare("SELECT * FROM `ventes`");
+    $requete->execute();
+    $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+    return $donnee;
+  }
   public static function recupIdVente($dateDebP,$dateFinP){
     $requeteprepa = DBConnex::getInstance()->prepare("SELECT idVente FROM ventes
       WHERE dateDebutProd=:dated AND dateFinProd=:datef");

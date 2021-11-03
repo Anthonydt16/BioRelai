@@ -21,9 +21,12 @@ if(!empty($_SESSION['idProduit'])){
     $_SESSION['bioRelai'] = "AdherentsAchats";
   }
 
-  if(!empty($_GET['quantite1'])){
+  if(!empty($_GET['panierValid'])){
       $_SESSION['bioRelai'] = "AdherentsPanier";
     }
+    if(!empty($_GET['suppProduit'])){
+        $_SESSION['bioRelai'] = "AdherentsPanier";
+      }
 
 
 
