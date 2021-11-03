@@ -10,6 +10,7 @@ $dispo=ProducteurDAO::venteDispo();
 if($dispo['bool']==True){
 
 $idV=VenteDAO::recupIdVente($dispo['debut'],$dispo['fin']);
+
 $e=2;
 }
 else {//sinon

@@ -118,6 +118,20 @@ class ProducteurDAO{
       $requeteprepa->execute();
     }
 
+    public static function venteTermine(){
+      $date=ProducteurDAO::laDate();
+      $requeteprepa = DBConnex::getInstance()->prepare("SELECT MIN(dateVente) AS mdate FROM ventes;");
+      $requeteprepa->execute();
+      $mdate = $requeteprepa->fetch(PDO::FETCH_ASSOC);
+      if($mdate['mdate']<$date){
+        return True;
+      }
+      else {
+        return False;
+      }
+
+    }
+
 
 
 

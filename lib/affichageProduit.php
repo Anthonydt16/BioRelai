@@ -44,14 +44,31 @@ public static function afficherProduitsProposer($tabProduits){
 }
 }
 
-public static function afficherCommandesEnCours($tabCommandes){
-  foreach ($tabCommandes as $key) {
+
+public static function afficherCommandesEnCours($tabClients){
+  foreach ($tabClients as $key) {
     echo'<div class="card" style="width: 18rem;">';
     echo'<div class="card-body">';
-    echo'<h5 class="card-title">'.$key['prenomUser'].' '.$key['nomUser'].' a commandé'.'</h5>';
-    echo'<p class="card-text">'.$key['quantite'].' '.$key['libelleProduit'].'(s)'.'</p>';
+    echo'<h5 class="card-title">'.$key['prenomUser'].' '.$key['nomUser'].' a commandé : '.'</h5>';
+    $tabCommandes=CommandesDAO::recupPanierClient($key['idCommande']);
+    foreach($tabCommandes as $keyy){
+      echo'<p class="card-text">'.$keyy['quantite'].' '.$keyy['libelleProduit'].'(s)'.'</p>';
+    }
     echo'</div>';
     echo'</div>';
+}
+}
+
+
+public static function afficherHistoriqueCommandes($tabVentes){
+  foreach ($tabVentes as $key) {
+    echo'<div class="card" style="width: 25rem;">';
+    echo'<div class="card-body">';
+    echo'<h5 class="card-title">'.'Le '.$key['dateVente'].'</h5>';
+    $tabClients=CommandesDAO::recupCommandeClient($key['idVente']);
+    affichageProduit::afficherCommandesEnCours($tabClients);
+  echo'</div>';
+  echo'</div>';
 }
 }
 

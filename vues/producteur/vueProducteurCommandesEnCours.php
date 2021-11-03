@@ -8,7 +8,7 @@ include_once ('vues/vueHaut.php');
       affichageProduit::afficherPasDeVente();
   }
   if($e==2){
-    affichageProduit::afficherCommandesEnCours(CommandesDAO::recupCommandesEnCours($idV));
+    affichageProduit::afficherCommandesEnCours(CommandesDAO::recupCommandeClient($idV));
   }
   ?>
 </div>
