@@ -75,9 +75,12 @@ include_once ('vues/vueHaut.php');
       echo '</tbody>';
       echo "</table>";
       //fin du tab
-  ?>
-     <!-- differencie 2 button -->
-     <button class="btn btn-success" type="submit" name ="panierValid" value="panier">validation</button>
+      if("Attente" == CommandesDAO::recupEtatPanier($_SESSION['idCommandes'])['Etat']){
+          echo '<button class="btn btn-success" type="submit" name ="panierValid" value="panier">validation</button>';
+      }
+
+     ?>
+
   </form>
 </div>
     <?php

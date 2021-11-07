@@ -25,4 +25,13 @@ class CommandesDAO{
     $requete = $requeteprepa->fetchAll(PDO::FETCH_ASSOC);
     return $requete;
   }
+
+
+  public static function recupEtatPanier($idCommandes){
+    $requeteprepa = DBConnex::getInstance()->prepare("select Etat from commandes where idCommande = :idC");
+    $requeteprepa->bindParam(":idC",$idCommandes);
+    $requeteprepa->execute();
+    $requete = $requeteprepa->fetch(PDO::FETCH_ASSOC);
+    return $requete;
+  }
 }

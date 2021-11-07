@@ -39,18 +39,19 @@ foreach ($produits->recupCommandes() as $key => $value) {
   }else{
     //verif si il a deja commandait le même jour /!\ attention condition si il le panier est valide le meme jours alors on cree le suivant
     if($value['dateCommande'] == date("Y-m-d") and $value['Etat'] != "valider" ){
+      $_SESSION['idCommandes'] = $compteurIDCommandes;
       break;
     }
     else{
         //verifier si la crea de commande se fais bien
-          $_SESSION['idCommandes'] = $compteurIDCommandes+1;
+        $_SESSION['idCommandes'] = $compteurIDCommandes+1;
         $adherent->ajoutdUneCommande($compteurIDCommandes+1,date("Y-m-d"),$UnUtilisateur->getIdUser(),$idvente);
     }
   }
 
 
 }
-  $_SESSION['idCommandes'] = $compteurIDCommandes;
+
   echo $compteurIDCommandes."<- id commande ".$_SESSION['idProduit']." <- codeProduit ";echo "</br>";
   echo "insert into `commander`  VALUES (".$compteurIDCommandes.", ".$_SESSION['idProduit'].",:quantite)";
   $adherent->ajoutDansLePanier($compteurIDCommandes,$_SESSION['idProduit'],0);
