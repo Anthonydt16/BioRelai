@@ -23,10 +23,10 @@ class ProduitDAO extends PDO{
       from produits as p, categories as c, producteur as pro, proposer as propo, ventes as V
       where c.idCategorie = p.idCategorie and propo.codeProduit = p.codeProduit and pro.mailProduct = p.mailProduct and V.idVente = propo.idVente
       and V.idVente =(
-        SELECT idVente 
+        SELECT idVente
         from ventes
-        where dateFinCli >'2021-11-03'
-      	and dateVente <'2021-11-03')");
+        where dateFinCli >:dateActuelle
+      	and dateVente <:dateActuelle)");
         $requete->bindParam(":dateActuelle",$dateActuelle);
         $requete->execute();
         $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -132,6 +132,15 @@ class ProduitDAO extends PDO{
         $requete = DBConnex::getInstance()->prepare("UPDATE `commandes` SET `Etat` = 'valider' WHERE `commandes`.`idCommande` = :idCommande;");
         $requete->bindParam(":idCommande",$idCommande);
         $requete->execute();
+
+      }
+
+      public function AffichageCommandeValider(){
+
+        $requete = DBConnex::getInstance()->prepare("SELECT c.*, p.libelleProduit FROM `commandes` as c, produits as p, commander as Co where p.codeProduit = Co.codeProduit and Co.idCommande = c.idCommande and Etat = "valider"");
+        $requete->execute();
+        $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+        return $donnee;
 
       }
 
