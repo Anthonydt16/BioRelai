@@ -137,7 +137,7 @@ class ProduitDAO extends PDO{
 
       public function AffichageCommandeValider(){
 
-        $requete = DBConnex::getInstance()->prepare("SELECT c.*, p.libelleProduit FROM `commandes` as c, produits as p, commander as Co where p.codeProduit = Co.codeProduit and Co.idCommande = c.idCommande and Etat = "valider"");
+        $requete = DBConnex::getInstance()->prepare("SELECT c.*, p.libelleProduit FROM `commandes` as c, produits as p, commander as Co where p.codeProduit = Co.codeProduit and Co.idCommande = c.idCommande and Etat = 'valider'");
         $requete->execute();
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
