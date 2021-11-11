@@ -58,13 +58,14 @@ public function ajoutDansLePanier($id,$CodeProduit,$quantite){
   }
 
 
-  public function affichagePanier(){
-      $requete = DBConnex::getInstance()->prepare("SELECT * FROM `commander`");
+  public function affichagePanier($idCommande){
+      $requete = DBConnex::getInstance()->prepare("SELECT c.idCommande ,p.libelleProduit,propo.prix, c.quantite ,c.codeProduit, propo.idVente FROM `commander` as c, proposer as propo, commandes as co, produits as p where co.idCommande = c.idCommande and p.codeProduit = c.codeProduit and c.idCommande = :idc GROUP BY p.codeProduit");
+      $requete->bindParam(":idc",$idCommande);
       $requete->execute();
+
       $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
       return $donnee;
   }
-
   public function affichagePanierPrecis($idCommande){
       $requete = DBConnex::getInstance()->prepare("SELECT * FROM `commander` where idCommande = :id");
       $requete->bindParam(":id",$idCommande);
@@ -81,4 +82,12 @@ public function ajoutDansLePanier($id,$CodeProduit,$quantite){
     $requete->bindParam(":idVente",$idVente);
     $requete->execute();
   }
+
+  public function facture($idAdherent){
+    $requete = DBConnex::getInstance()->prepare("SELECT co.Etat,c.idCommande ,p.libelleProduit,propo.prix, c.quantite ,c.codeProduit, co.dateCommande FROM `commander` as c, proposer as propo, commandes as co, produits as p where co.idCommande = c.idCommande and p.codeProduit = c.codeProduit and co.Etat = 'valider' and co.idAdherent =:idAdherent GROUP BY co.idCommande,p.codeProduit");
+    $requete->bindParam(":idAdherent",$idAdherent);
+    $requete->execute();
+    $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+    return $donnee;
+    }
 }

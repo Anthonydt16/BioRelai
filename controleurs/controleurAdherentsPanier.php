@@ -30,5 +30,5 @@ $produits = new ProduitDAO();
     echo 'supprimer';
   }
 
-$EnTete = array("produit", "prix unité", "quantité","supprimer");
+$EnTete = array("idCommande", "nom Article", "prix unite","quantité","supprimer");
 require_once 'vues/adherents/vueAdherentsPanier.php' ;
