@@ -3,7 +3,6 @@ $produits = new ProduitDAO();
 $UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
 if(isset($_SESSION['idProduit'])){
   $idPorduit = $_SESSION['idProduit'];
-
   //ajout dans le Panier
   $adherent = new adherentDAO();
   $idCommander = $produits->compteLeNbDeProduitCommander();
@@ -45,16 +44,19 @@ foreach ($produits->recupCommandes() as $key => $value) {
     else{
         //verifier si la crea de commande se fais bien
         $_SESSION['idCommandes'] = $compteurIDCommandes+1;
-        $adherent->ajoutdUneCommande($compteurIDCommandes+1,date("Y-m-d"),$UnUtilisateur->getIdUser(),$idvente);
+        $adherent->ajoutdUneCommande($_SESSION['idCommandes'],date("Y-m-d"),$UnUtilisateur->getIdUser(),$idvente);
     }
   }
 
 
 }
 
-  echo $compteurIDCommandes."<- id commande ".$_SESSION['idProduit']." <- codeProduit ";echo "</br>";
-  echo "insert into `commander`  VALUES (".$compteurIDCommandes.", ".$_SESSION['idProduit'].",:quantite)";
-  $adherent->ajoutDansLePanier($compteurIDCommandes,$_SESSION['idProduit'],0);
+  echo $_SESSION['idCommandes']."<- id commande ".$_SESSION['idProduit']." <- codeProduit ";echo "</br>";
+  echo "</br>";
+  echo $UnUtilisateur->getIdUser();
+  echo "</br>";
+  echo "insert into `commander`  VALUES (".$_SESSION['idCommandes'].", ".$_SESSION['idProduit'].",:quantite)";
+  $adherent->ajoutDansLePanier($_SESSION['idCommandes'],$_SESSION['idProduit'],0);
 
    $_SESSION['idProduit'] = null;
 }

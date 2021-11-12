@@ -1,6 +1,5 @@
 <?php
 include_once ('vues/vueHaut.php');
-var_dump($adherent->affichagePanier($_SESSION['idCommandes']));
 ?>
 <div class="conteneur">
   <form action="" method="get" class="form-example">

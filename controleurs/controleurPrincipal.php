@@ -80,6 +80,7 @@ if(isset($_POST["loginI"])){
 		$utilisateurDonnee = new UtilisateurDAO();
 
 		$utilisateurDonnee->AjoutUtilisateur($_POST['email'],$_POST['prenom'],$_POST['nom'],$_POST['mdpI'],$_POST['loginI'],1);
+    $utilisateurDonnee->Ajoutadhrent($idAd,$idUser);
 
 		$_SESSION['bioRelai'] = 'Connexion';
 	}

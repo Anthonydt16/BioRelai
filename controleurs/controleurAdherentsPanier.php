@@ -5,6 +5,7 @@ $produits = new ProduitDAO();
 
   if(!empty($_GET['panierValid'])){
     $tabQuantiteChoix = [];
+
 // penser a filter la requete avec l'id de la commande
     foreach ($adherent->affichagePanierPrecis($_SESSION['idCommandes']) as $key => $value) {
 

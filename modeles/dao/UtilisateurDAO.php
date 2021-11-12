@@ -21,9 +21,21 @@ class UtilisateurDAO{
      $requete->bindParam(":statut",$statut);
      $requete->execute();
 
-
-
    }
+
+
+      public static function Ajoutadhrent($idAd,$idUser){
+        $requete = DBConnex::getInstance()->prepare("INSERT INTO `utilisateur` VALUES ( :idAd, :isUser);");
+        $requete->bindParam(":idAd",$idAd);
+        $requete->bindParam(":idUser",$idUser);
+
+        $requete->execute();
+
+
+
+      }
+
+      SELECT * FROM `adherent`
 
 
 
