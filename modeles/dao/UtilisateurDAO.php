@@ -25,7 +25,7 @@ class UtilisateurDAO{
 
 
       public static function Ajoutadhrent($idAd,$idUser){
-        $requete = DBConnex::getInstance()->prepare("INSERT INTO `utilisateur` VALUES ( :idAd, :isUser);");
+        $requete = DBConnex::getInstance()->prepare("INSERT INTO `adherent` (`idAdherent`, `idUser`) VALUES ( :idAd, :idUser);");
         $requete->bindParam(":idAd",$idAd);
         $requete->bindParam(":idUser",$idUser);
 
@@ -34,9 +34,18 @@ class UtilisateurDAO{
 
 
       }
-
-      SELECT * FROM `adherent`
-
+      public static function selectAdherent(){
+        $requete = DBConnex::getInstance()->prepare("SELECT * FROM `adherent`");
+        $requete->execute();
+        $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $donnee;
+    }
+  public static function lastIdUser(){
+    $requete = DBConnex::getInstance()->prepare("SELECT idUser FROM utilisateur ORDER BY idUser DESC LIMIT 1");
+    $requete->execute();
+    $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
+    return $donnee;
+}
 
 
 }

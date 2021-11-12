@@ -70,7 +70,6 @@ class ProduitDAO extends PDO{
     $requete = DBConnex::getInstance()->prepare("DELETE FROM produits WHERE codeProduit=:id");
     $requete->bindParam(":id",$id);
     $requete->execute();
-
   }
 
   public static function supprimerProduitDuPanier($idProduit, $idCommande){
@@ -122,7 +121,7 @@ class ProduitDAO extends PDO{
 
       }
       public function recupCommandes(){
-        $requete = DBConnex::getInstance()->prepare("SELECT * FROM `Commandes`");
+        $requete = DBConnex::getInstance()->prepare("SELECT c.*,a.idUser FROM `Commandes` as c, adherent as a, utilisateur as u where c.idAdherent = a.idAdherent and a.idUser = u.idUser");
         $requete->execute();
         $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
         return $donnee;

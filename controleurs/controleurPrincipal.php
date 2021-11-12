@@ -80,7 +80,13 @@ if(isset($_POST["loginI"])){
 		$utilisateurDonnee = new UtilisateurDAO();
 
 		$utilisateurDonnee->AjoutUtilisateur($_POST['email'],$_POST['prenom'],$_POST['nom'],$_POST['mdpI'],$_POST['loginI'],1);
-    $utilisateurDonnee->Ajoutadhrent($idAd,$idUser);
+    $nbAdherent = count($utilisateurDonnee->selectAdherent());
+    foreach ($utilisateurDonnee->lastIdUser() as $key => $value) {
+
+          $utilisateurDonnee->Ajoutadhrent($nbAdherent+1,$value);
+    }
+    $_SESSION['idAdherent'] = $nbAdherent+1;
+
 
 		$_SESSION['bioRelai'] = 'Connexion';
 	}

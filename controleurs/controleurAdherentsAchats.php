@@ -33,7 +33,7 @@ foreach ($produits->recupCommandes() as $key => $value) {
 
   $compteurIDCommandes ++;
   //verification si il existe deja une commande a sont nom
-  if($value['idAdherent'] == $UnUtilisateur->getIdUser() and $value['Etat'] != "valider"){
+  if($value['idUser'] == $UnUtilisateur->getIdUser() and $value['Etat'] != "valider"){
     break;
   }else{
     //verif si il a deja commandait le même jour /!\ attention condition si il le panier est valide le meme jours alors on cree le suivant
@@ -44,13 +44,19 @@ foreach ($produits->recupCommandes() as $key => $value) {
     else{
         //verifier si la crea de commande se fais bien
         $_SESSION['idCommandes'] = $compteurIDCommandes+1;
-        $adherent->ajoutdUneCommande($_SESSION['idCommandes'],date("Y-m-d"),$UnUtilisateur->getIdUser(),$idvente);
+        echo "</br>";
+        echo "idc = ".$_SESSION['idCommandes'];
+        echo" date=".date("Y-m-d");
+        echo" id user= ".$UnUtilisateur->getIdUser();
+        echo" idvente =".$idvente;
+        echo "</br>";
+        $adherent->ajoutdUneCommande($_SESSION['idCommandes'],date("Y-m-d"),$_SESSION['idAdherent'],$idvente);
     }
   }
 
 
 }
-
+  echo "</br>";
   echo $_SESSION['idCommandes']."<- id commande ".$_SESSION['idProduit']." <- codeProduit ";echo "</br>";
   echo "</br>";
   echo $UnUtilisateur->getIdUser();
