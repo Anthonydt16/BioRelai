@@ -33,11 +33,11 @@ foreach ($produits->recupCommandes() as $key => $value) {
 
   $compteurIDCommandes ++;
   //verification si il existe deja une commande a sont nom
-  if($value['idUser'] == $UnUtilisateur->getIdUser() and $value['Etat'] != "valider"){
+  if($value['idUser'] == $UnUtilisateur->getIdUser() and $value['Etat'] != "validee"){
     break;
   }else{
     //verif si il a deja commandait le même jour /!\ attention condition si il le panier est valide le meme jours alors on cree le suivant
-    if($value['dateCommande'] == date("Y-m-d") and $value['Etat'] != "valider" ){
+    if($value['dateCommande'] == date("Y-m-d") and $value['Etat'] != "validee" ){
       $_SESSION['idCommandes'] = $compteurIDCommandes;
       break;
     }

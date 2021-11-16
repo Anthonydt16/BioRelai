@@ -46,6 +46,13 @@ class UtilisateurDAO{
     $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
     return $donnee;
 }
+public static function selectAdherentidUser($idUser){
+  $requete = DBConnex::getInstance()->prepare("SELECT idAdherent FROM `adherent` where idUser=:id");
+  $requete->bindParam(":id",$idUser);
+  $requete->execute();
+  $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
+  return $donnee;
+}
 
 
 }

@@ -17,17 +17,19 @@ include_once ('vues/vueHaut.php');
     </thead>
     <tbody>
   <?php
-  foreach ($tabResul as $key => $value) {
-            echo '<tr>';
-            echo '<th>'.$value['idCommande'].'</th>';
-            echo '<td>'.$value['libelleProduit'].'</td>';
-            echo '<td>'.$value['prix'].'</td>';
-            echo '<td>'.$value['quantite'].'</td>';
-            echo '<td>'.$value['dateCommande'].'</td>';
-            echo '<td>'.$value['prix']*$value['quantite'].' Euro</td>';
-            echo '</tr>';
+  if(isset(  $tabResul)){
+    foreach ($tabResul as $key => $value) {
+              echo '<tr>';
+              echo '<th>'.$value['idCommande'].'</th>';
+              echo '<td>'.$value['libelleProduit'].'</td>';
+              echo '<td>'.$value['prix'].'</td>';
+              echo '<td>'.$value['quantite'].'</td>';
+              echo '<td>'.$value['dateCommande'].'</td>';
+              echo '<td>'.$value['prix']*$value['quantite'].' Euro</td>';
+              echo '</tr>';
+  }
+  }
 
-}
   ?>
 </tbody>
 </table>

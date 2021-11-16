@@ -84,7 +84,7 @@ public function ajoutDansLePanier($id,$CodeProduit,$quantite){
   }
 
   public function facture($idAdherent){
-    $requete = DBConnex::getInstance()->prepare("SELECT co.Etat,c.idCommande ,p.libelleProduit,propo.prix, c.quantite ,c.codeProduit, co.dateCommande FROM `commander` as c, proposer as propo, commandes as co, produits as p where co.idCommande = c.idCommande and p.codeProduit = c.codeProduit and co.Etat = 'valider' and co.idAdherent =:idAdherent GROUP BY co.idCommande,p.codeProduit");
+    $requete = DBConnex::getInstance()->prepare("SELECT co.Etat,c.idCommande ,p.libelleProduit,propo.prix, c.quantite ,c.codeProduit, co.dateCommande FROM `commander` as c, proposer as propo, commandes as co, produits as p where co.idCommande = c.idCommande and p.codeProduit = c.codeProduit and co.Etat = 'validee' and co.idAdherent =:idAdherent GROUP BY co.idCommande,p.codeProduit");
     $requete->bindParam(":idAdherent",$idAdherent);
     $requete->execute();
     $donnee =  $requete->fetchAll(PDO::FETCH_ASSOC);
