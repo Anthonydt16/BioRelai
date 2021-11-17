@@ -59,10 +59,15 @@ if(isset($_POST["login"])){
 		$_SESSION['authentification'] = $tabUtilisateur;
 
 		if($_SESSION['authentification']){
-
+      $utilisateurDonnee = new UtilisateurDAO();
 			//instanciation de la classe
 			$unUtilisateur= new Utilisateur();
 			$unUtilisateur->hydrate($tabUtilisateur);
+      var_dump($utilisateurDonnee::selectAdherentidUser($unUtilisateur->getIdUser()));
+      foreach ($utilisateurDonnee::selectAdherentidUser($unUtilisateur->getIdUser()) as $key => $value) {
+              $_SESSION['idAdherent'] = $value['idAdherent'];
+      }
+
 			$_SESSION['unUtilisateur'] = serialize($unUtilisateur);
 			$_SESSION['bioRelai'] = 'Visiteurs';
 			$_SESSION['Compte'] = 'inscrit';

@@ -128,7 +128,7 @@ class ProduitDAO extends PDO{
       }
 
       public function validerPanier($idCommande){
-        $requete = DBConnex::getInstance()->prepare("UPDATE `commandes` SET `Etat` = 'valider' WHERE `commandes`.`idCommande` = :idCommande;");
+        $requete = DBConnex::getInstance()->prepare("UPDATE `commandes` SET `Etat` = 'validee' WHERE `commandes`.`idCommande` = :idCommande;");
         $requete->bindParam(":idCommande",$idCommande);
         $requete->execute();
 
@@ -136,7 +136,7 @@ class ProduitDAO extends PDO{
 
       public function AffichageCommandeValider(){
 
-        $requete = DBConnex::getInstance()->prepare("SELECT c.*, p.libelleProduit FROM `commandes` as c, produits as p, commander as Co where p.codeProduit = Co.codeProduit and Co.idCommande = c.idCommande and Etat = 'valider'");
+        $requete = DBConnex::getInstance()->prepare("SELECT c.*, p.libelleProduit FROM `commandes` as c, produits as p, commander as Co where p.codeProduit = Co.codeProduit and Co.idCommande = c.idCommande and Etat = 'validee'");
         $requete->execute();
         $donnee =  $requete->fetch(PDO::FETCH_ASSOC);
         return $donnee;
