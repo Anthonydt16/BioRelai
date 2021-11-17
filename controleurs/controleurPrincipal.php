@@ -1,4 +1,9 @@
+
+
 <?php
+
+
+
 if(isset($_GET['idProduit'])){
   echo $_GET['idProduit'];
 }
@@ -92,9 +97,9 @@ if(isset($_POST["loginI"])){
 	}
 }
 
-//Modif bio relai
+//Modif compte produceur en tant que bioRelai
 
-if(isset($_POST["loginIMBio"])){
+if(isset($_POST["loginIMBio"] )){
 
 	if(!empty($_POST["loginIMBio"])){
 		$maConnex = new DBConnex();
@@ -103,10 +108,139 @@ if(isset($_POST["loginIMBio"])){
 		//recup des login et MDP
 		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
 
-		$utilisateurDonneeModifBioRelai=BioRelaiDAO::ModifCompteBioRelai($_POST['loginIMBio'],$_POST['mdpIMBio'],$UnUtilisateur->getIdUser());
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::ModifCompteBioRelai($_POST['loginIMBio'],$_POST['mdpIMBio'],intval($UnUtilisateur->getIdUser()));
 
+    $_SESSION['Compte'] = 'visiteur';
+    $_SESSION['bioRelai'] ='Visiteurs';
+    $_SESSION['unUtilisateur'] = [];
+    $_SESSION['authentification'] = [];
+    header('location: index.php');
 		$_SESSION['bioRelai'] = 'Connexion';
 
+	}
+}
+// suppression d'un producteur en tant que bioRelai
+
+if(isset($_POST["delProd"] )){
+
+	if(!empty($_POST["delProd"])){
+		$maConnex = new DBConnex();
+
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::DeleteCompteProducteur($_POST['delProd']);
+    $_SESSION['bioRelai'] = 'Connexion';
+
+
+	}
+}
+
+// suppression d'une vente en tant que bioRelai
+
+if(isset($_POST["delVente"] )){
+
+	if(!empty($_POST["delVente"])){
+		$maConnex = new DBConnex();
+
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::DeleteVente($_POST['delVente']);
+    $_SESSION['bioRelai'] = 'Connexion';
+
+
+	}
+}
+
+// modification d'une vente en tant que bioRelai
+
+if(isset($_POST["modVente"] )){
+
+	if(!empty($_POST["modVente"])){
+		$maConnex = new DBConnex();
+
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::ModifVentes($_POST['modVente'],$_POST['moddateVenteBio'],$_POST['moddateDebutProdVenteBio'],$_POST['moddateFinProdVenteBio'],$_POST['moddateFinCliVenteBio']);
+    $_SESSION['bioRelai'] = 'Connexion';
+
+
+	}
+}
+
+
+
+// ajout d'un producteur en tant que bioRelai
+
+if(isset($_POST["LoginAddProd"] )){
+
+	if(!empty($_POST["LoginAddProd"])){
+		$maConnex = new DBConnex();
+
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::AjouterCompteProducteur($_POST['mailIAddProd'],$_POST['prenomAddProd'],$_POST['nomAddProd'],$_POST['mdpIAddProd'],$_POST['LoginAddProd'], $_POST['adressAddProN'], $_POST['CommuneAddProN'], $_POST['codePostalAddProN'],  $_POST['presentAddProN']);
+    $_SESSION['bioRelai'] = 'Connexion';
+
+
+	}
+}
+
+// ajout d'un produit en tant que bioRelai
+
+if(isset($_POST["NouveauProduit"] )){
+
+	if(!empty($_POST["NouveauProduit"])){
+		$maConnex = new DBConnex();
+
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::AjouterNouveauProduit($_POST['NouveauProduit']);
+    $_SESSION['bioRelai'] = 'Connexion';
+
+
+	}
+}
+
+//ajout d'une nouvelle ventes
+
+if(isset($_POST["dateVenteBio"] )){
+
+	if(!empty($_POST["dateVenteBio"])){
+		$maConnex = new DBConnex();
+
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+		$utilisateurDonneeModifBioRelai=BioRelaiDAO::AjouterNouvelleVente($_POST['dateVenteBio'],$_POST['dateDebutProdVenteBio'],$_POST['dateFinProdVenteBio'],$_POST['dateFinCliVenteBio']);
+    $_SESSION['bioRelai'] = 'Connexion';
+
+
+	}
+}
+
+if(isset($_POST["LoginNProd"] )){
+
+	if(!empty($_POST["LoginNProd"])){
+		$maConnex = new DBConnex();
+
+		$maConnex = $maConnex->connexion(Param::$dsn, Param::$user, Param::$pass);
+		//recup des login et MDP
+		$UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
+
+    BioRelaiDAO::ModifCompteProducteur($_POST['idNprod'],$_POST['mdpIPProd'],$_POST['LoginNProd'],$_POST['adressProN'], $_POST['CommuneProN'], $_POST['codePostalProN'], $_POST['presentProN']);
+
+		$_SESSION['bioRelai'] = 'Connexion';
 	}
 }
 
@@ -212,6 +346,7 @@ if($_SESSION['Compte'] == 'visiteur'){
 }
 
 //verifi si $_SESSION['unUtilisateur'] existe bien sinon il passe
+
 if(isset($_SESSION['unUtilisateur'])){
 
 		if(!empty($_SESSION['unUtilisateur'])){
@@ -229,7 +364,6 @@ if(isset($_SESSION['unUtilisateur'])){
 						include_once dispatcher::dispatch($_SESSION['bioRelai']);
 				}
 			if ($UnUtilisateur->getStatut() == 'RESP') {
-
 
 				$_SESSION['bioRelai'] = 'BioRelai';
 			include_once dispatcher::dispatch($_SESSION['bioRelai']);

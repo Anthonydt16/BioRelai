@@ -3,10 +3,14 @@
 $UnUtilisateur= unserialize($_SESSION['unUtilisateur']);
 $bioRelai = new Menu("bioRelai");
 
-$bioRelai->ajouterComposant($bioRelai->creerItemLien("Ventes", "BioRelaiVentes"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien("Modifier Ventes", "BioRelaiModVentes"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien("Supprimer Ventes", "BioRelaiDelVentes"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien("Ajouter Ventes", "BioRelaiAddVentes"));
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Autorisation", "BioRelaiAutorisation"));
-$bioRelai->ajouterComposant($bioRelai->creerItemLien($UnUtilisateur->getLogin(), "BioRelaiCompte"));
-$bioRelai->ajouterComposant($bioRelai->creerItemLien("Producteurs", "BioRelaiProducteurs"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien($UnUtilisateur->getLogin()." (BioRelai)", "BioRelaiCompte"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien("Ajouter Producteurs", "BioRelaiAddProducteurs"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien("Modif Producteurs", "BioRelaiModProducteurs"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien("Supprimer Producteurs", "BioRelaiDelProducteurs"));
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Factures", "BioRelaiFactures"));
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Produit", "BioRelaiProduit"));
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Déconnexion", "Deconnexion"));

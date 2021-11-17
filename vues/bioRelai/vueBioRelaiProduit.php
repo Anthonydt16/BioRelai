@@ -7,8 +7,11 @@ include_once ('vues/vueHaut.php');
     	<div class='titre'><h5>Produit</h5></div>
     		<div class="card-body">
 				<div class="form-group">
-						<?php 
+						<?php
 
+						$formulaireNewProd->afficherFormulaire();
+
+					
 						?>
 				</div>
     		</div>

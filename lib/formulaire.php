@@ -65,6 +65,42 @@ class Formulaire{
 		return $composant;
 	}
 
+	public function creerInputCheckBox($unNom, $unId, $uneValue , $checked , $placeholder , $pattern,$class){
+		$composant = "<input  class='".$class."' type = 'checkbox' name = '" . $unNom . "' id = '" . $unId . "' ";
+		if (!empty($uneValue)){
+			$composant .= "value = '" . $uneValue . "' ";
+		}
+		if (!empty($placeholder)){
+			$composant .= "placeholder = '" . $placeholder . "' ";
+		}
+		if ( $checked != false){
+			$composant .= "checked ";
+		}
+		if (!empty($pattern)){
+			$composant .= "pattern = '" . $pattern . "' ";
+		}
+		$composant .= "/>";
+		return $composant;
+	}
+
+	public function creerInputDate($unNom, $unId, $uneValue , $required , $placeholder , $pattern,$class){
+		$composant = "<input  class='".$class."' type = 'date' name = '" . $unNom . "' id = '" . $unId . "' ";
+		if (!empty($uneValue)){
+			$composant .= "value = '" . $uneValue . "' ";
+		}
+		if (!empty($placeholder)){
+			$composant .= "placeholder = '" . $placeholder . "' ";
+		}
+		if ( $required = 1){
+			$composant .= "required ";
+		}
+		if (!empty($pattern)){
+			$composant .= "pattern = '" . $pattern . "' ";
+		}
+		$composant .= "/>";
+		return $composant;
+	}
+
 	public function creerInputNombre($unNom, $unId, $unMax , $required , $placeholder , $pattern,$class){
 		$composant = "<input  class='".$class."' type = 'number' min = '1' max = '" . $unMax . "'  name = '" . $unNom . "' id = '" . $unId . "' ";
 		if (!empty($placeholder)){
@@ -126,6 +162,15 @@ public function creerInputDescription($unNom, $unId, $uneValue , $required , $pl
 		$composant = "<select  class='".$class."'  name = '" . $unNom . "' id = '" . $unId . "' >";
 		foreach ($options as $option){
 			$composant .= "<option value = ".$option.">".$option."</option>" ;
+		}
+		$composant .= "</select></td></tr>";
+		return $composant;
+	}
+
+	public function creerSelectWith2Options($unNom, $unId, $unLabel, $options,$options2, $class){
+		$composant = "<select  class='".$class."'  name = '" . $unNom . "' id = '" . $unId . "' >";
+		foreach ($options as $option){
+			$composant .= "<option value = ".$option.">".$option." ".$options2."</option>" ;
 		}
 		$composant .= "</select></td></tr>";
 		return $composant;

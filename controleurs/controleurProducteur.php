@@ -7,7 +7,7 @@ $bioRelai->ajouterComposant($bioRelai->creerItemLien("Vendre", "ProducteurMesPro
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Mes Produits", "ProducteurMesProduits"));
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Mes Commandes", "ProducteurCommandesEnCours"));
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Historique", "ProducteurCommandesHisto"));
-$bioRelai->ajouterComposant($bioRelai->creerItemLien("Mon Compte", "ProducteurMonCompte"));
+$bioRelai->ajouterComposant($bioRelai->creerItemLien("Mon Compte (Producteur)", "ProducteurMonCompte"));
 $bioRelai->ajouterComposant($bioRelai->creerItemLien("Deconnexion", "Deconnexion"));
 $menuPrincipalbioRelai = $bioRelai->creerMenu('bioRelai','bioRelai');
 
@@ -24,4 +24,3 @@ if(!empty($_SESSION['navBarRequete'])){
 
 
 include_once dispatcher::dispatch($_SESSION['bioRelai']);
-
