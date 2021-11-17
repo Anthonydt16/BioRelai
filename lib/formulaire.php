@@ -65,10 +65,13 @@ class Formulaire{
 		return $composant;
 	}
 
-	public function creerInputCheckBox($unNom, $unId, $uneValue , $checked , $placeholder , $pattern,$class){
+	public function creerInputCheckBox($unNom, $unId, $uneValue , $checked,$disabled  , $placeholder, $pattern,$class){
 		$composant = "<input  class='".$class."' type = 'checkbox' name = '" . $unNom . "' id = '" . $unId . "' ";
 		if (!empty($uneValue)){
 			$composant .= "value = '" . $uneValue . "' ";
+		}
+		if (!empty($disabled)){
+			$composant .= "disabled = '" . $disabled . "' ";
 		}
 		if (!empty($placeholder)){
 			$composant .= "placeholder = '" . $placeholder . "' ";
