@@ -5,7 +5,7 @@ class CommandesDAO{
   public static function recupCommandeClient($idV){
       $mail=ProducteurDAO::recupMailP();
       $requeteprepa = DBConnex::getInstance()->prepare("SELECT DISTINCT commandes.idCommande, prenomUser, nomUser FROM commander,commandes,adherent,utilisateur,produits
-         WHERE idVente=:vente AND Etat='Validee' AND mailProduct=:mail AND commandes.idAdherent=adherent.idAdherent
+         WHERE idVente=:vente AND Etat='validee' AND mailProduct=:mail AND commandes.idAdherent=adherent.idAdherent
          AND adherent.idUser=utilisateur.idUser AND commandes.idCommande=commander.idCommande
          AND commander.codeProduit=produits.codeProduit;");
       $requeteprepa->bindParam(":vente",$idV);
