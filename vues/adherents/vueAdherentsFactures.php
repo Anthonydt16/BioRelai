@@ -17,7 +17,7 @@ include_once ('vues/vueHaut.php');
     </thead>
     <tbody>
   <?php
-  if(isset(  $tabResul)){
+  if(isset($tabResul)){
     foreach ($tabResul as $key => $value) {
               echo '<tr>';
               echo '<th>'.$value['idCommande'].'</th>';
