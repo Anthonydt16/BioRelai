@@ -9,7 +9,7 @@ include_once ('vues/vueHaut.php');
   }
   if($e==2){
     affichageProduit::afficherProduitsProposer(VenteDAO::recupProduitsProposer($idV));
-  }
+  
   ?>
   <main>
   <div id="texteBienvenue" class="card" style="width: 80%;">
@@ -50,6 +50,7 @@ include_once ('vues/vueHaut.php');
       </div>
   </div>
   </main>
+<?php }?>
 </div>
 <div>
     <?php
